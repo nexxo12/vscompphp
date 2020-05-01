@@ -1,0 +1,202 @@
+body{
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* merubah warna background dropdown */
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+    background-color: #343A40;
+}
+.navbar-expand-sm{
+  font-size: 18px;
+  word-spacing: 5px;
+  transition: 0.4s; /* untuk transisi scroll nav */
+}
+/* merubah warna hover */
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+a.dropdown-item{
+  color: white;
+}
+
+.form-inline .form-control{
+  width: 130px;
+  margin-left: 20px;
+}
+
+.footer-bawah{
+  background: #23272b;
+  width: 100%;
+  height: 305px;
+}
+
+
+.space-footer{
+  width: 13%;
+}
+
+img.content-footer{
+  width: 90%;
+}
+
+table.footer-table{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+#navbar #logo {
+  transition: 0.4s;
+}
+
+a.footer-link{
+  color: darkgrey;
+}
+
+.card{
+  box-shadow: 1px 7px 5px #aaaaaa;
+
+}
+
+.space{
+  width: 10%;
+}
+
+.input-ongkir{
+  width: 39.3%;
+  box-shadow: 1px 2px 5px #aaaaaa;
+  margin-left: 16px;
+  border: 1px solid;
+  margin-top: 15px;
+}
+
+.input-position{
+  padding: 20px;
+}
+
+.button-cek{
+  margin-left: 35%;
+
+}
+
+.result-ongkir{
+  border: 1px solid;
+  width: 52%;
+  margin-top: 25px;
+  margin-left: 6%;
+}
+
+.h6{
+  position: absolute;
+  left: 48.3%;
+}
+
+@media only screen and (max-width: 600px) {
+  .input-ongkir {
+    width: 94%;
+  }
+  .result-ongkir{
+    width: 94%;
+    margin-left: 3.5%;
+    margin-top: 10%;
+  }
+
+  .h6{
+    display: none;
+  }
+  .footer-bawah {
+    height: 620px;
+  }
+  .footer-item-position{
+    position: relative;
+    right: 12%;
+  }
+  .navbar-nav{
+    position: relative;
+    left: 40%;
+  }
+
+  .form-inline{
+    position: relative;
+    left: 30%;
+  }
+  .input-warranty > .form-control{
+    width: 200px;
+  }
+  .col-md-6{
+    position: relative;
+    right: 24%;
+  }
+
+}
+
+.input-warranty{
+  width: 30%;
+  display: inline-flex
+
+}
+
+.input-warranty > .btn{
+  margin-left: 10px;
+}
+
+.text-contact{
+  display: inline-flex;
+  margin-left: 5px;
+  font-size: 17px;
+}
+.login-form{
+  position: relative;
+  left: 27.5%;
+  width: 90%;
+
+}
+.login-form-input{
+  width: 70%;
+  padding: 20px;
+  margin-left: 72px;
+}
+.col-md-6{
+  border-radius: 10px;
+  box-shadow: 1px 2px 5px #aaaaaa;
+  border: 1px solid;
+}

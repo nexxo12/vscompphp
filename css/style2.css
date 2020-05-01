@@ -1,0 +1,168 @@
+body{
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#navbar #logo {
+  transition: 0.4s;
+}
+
+/* merubah warna background dropdown */
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+    background-color: #343A40;
+}
+.navbar-expand-sm{
+  font-size: 18px;
+  word-spacing: 5px;
+  transition: 0.4s; /* untuk transisi scroll nav */
+}
+/* merubah warna hover */
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+a.dropdown-item{
+  color: white;
+}
+
+.form-inline .form-control{
+  width: 130px;
+  margin-left: 20px;
+}
+
+.footer-bawah{
+  background: #23272b;
+  width: 100%;
+  height: 313px;
+}
+
+img.content-footer{
+  width: 90%;
+}
+
+table.footer-table{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.space-footer{
+  width: 13%;
+}
+
+a.footer-link{
+  color: darkgrey;
+}
+
+h4{
+  padding-top: 30px;
+}
+
+h5{
+  margin-top: 24px;
+}
+
+.simulasi{
+  margin-left: 24px;
+  margin-bottom: 50px;
+  margin-right: 24px;
+}
+
+.col-md-1{
+  position: relative;
+  right: 30px;
+}
+
+.col-md-3{
+  position: relative;
+  right: 30px;
+}
+
+
+.qty{
+  width: 100%;
+}
+
+.button{
+  position: relative;
+  bottom: 27px;
+}
+
+@media only screen and (max-width: 600px) {
+  .qty{
+    width: 89%;
+    margin-left: 12%;
+    text-align: center;
+  }
+  .total{
+    display: none;
+  }
+  .form-qty{
+    position: absolute;
+    top: 1390px;
+    width: 83.5%;
+  }
+  .form-harga{
+    position: absolute;
+    top: 750px;
+    width: 83.5%;
+  }
+  .button{
+    position: relative;
+    top: 320%;
+  }
+  .footer-bawah {
+    height: 662px;
+  }
+  .footer-item-position{
+    position: relative;
+    right: 12%;
+  }
+  .navbar-nav{
+    position: relative;
+    left: 40%;
+  }
+
+  .form-inline{
+    position: relative;
+    left: 30%;
+  }
+
+}

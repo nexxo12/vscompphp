@@ -1,0 +1,166 @@
+body{
+  background-color: black;
+  animation: fadein 2s;
+  -moz-animation: fadein 2s; /* Firefox */
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+  -o-animation: fadein 2s; /* Opera */
+}
+
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-moz-keyframes fadein { /* Firefox */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-webkit-keyframes fadein { /* Safari and Chrome */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+@-o-keyframes fadein { /* Opera */
+    from {
+        opacity:0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* efek scroll  */
+#navbar #logo {
+  transition: 0.4s;
+}
+
+/* merubah warna background dropdown */
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+    background-color: #343A40;
+}
+.navbar-expand-sm{
+  font-size: 18px;
+  word-spacing: 5px;
+  transition: 0.4s;
+}
+/* merubah warna hover */
+.dropdown-item:focus, .dropdown-item:hover {
+    text-decoration: none;
+    background-color: #fff;
+}
+
+/* merubah warna link dropdown */
+a.dropdown-item{
+  color: white;
+}
+
+/* merubah posisi pencarian */
+.form-inline .form-control{
+  width: 130px;
+  margin-left: 20px;
+}
+
+/* mengatur gambar produk */
+img.gambar-produk{
+  position: relative;
+  width: 102%;
+  right: 5px;
+  opacity: 1;
+
+}
+img.gambar-produk:hover{
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  width: 105%;
+  opacity: 0.5;
+  transition: 0.4s ease-out;
+}
+/* end mengatur gambar produk */
+
+/* menambahkan kotak text di gambar produk */
+.overlay {
+  position: absolute;
+  height: 20%;
+  width: 98%;
+  opacity: 0;
+  transition: .5s ease;
+  background: rgba(0, 0, 0, 0.7);
+  bottom: 0%;
+  right: 0%;
+  left: 2%;
+
+}
+/* menambahkan kotak text hover di gambar produk*/
+ .col-md-4:hover .overlay {
+  opacity: 1;
+  width: 99%;
+}
+
+/* menambahkan text di gambar produk*/
+.text {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* untuk footer */
+.footer-bawah{
+  background: #23272b;
+  width: 100%;
+  height: 305px;
+}
+
+/* untuk mengatur responsive di mobile*/
+@media only screen and (max-width: 600px) {
+  .footer-bawah {
+    height: 620px;
+  }
+  .footer-item-position{
+    position: relative;
+    right: 12%;
+  }
+
+  .navbar-nav{
+    position: relative;
+    left: 40%;
+  }
+
+  .form-inline{
+    position: relative;
+    left: 30%;
+  }
+}
+/* end untuk mengatur responsive di mobile*/
+
+/* untuk gambar di footer */
+img.content-footer{
+  width: 90%;
+}
+
+/* untuk tabel yang menampung gambar di footer */
+table.footer-table{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+/* untuk link di footer */
+a.footer-link{
+  color: darkgrey;
+}

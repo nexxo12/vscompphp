@@ -1,0 +1,52 @@
+
+/* merubah warna background dropdown */
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+    position: absolute;
+    background-color: #343A40;
+}
+.navbar-expand-sm{
+  font-size: 18px;
+  word-spacing: 5px;
+}
+/* merubah warna hover */
+.dropdown-item:focus, .dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #fff;
+}
+
+a.dropdown-item{
+  color: white;
+}
+
+.form-input{
+  padding: 20px;
+}
+
+.form-input > .table-group{
+  width: 100%;
+
+}
+
+.form-group > .input-barang{
+  width: 500px;
+}
+.form-group > .input-harga{
+  width: 200px;
+}
+.form-group > .input-kategori{
+  width: 170px;
+}
+
+.btn-submit{
+  margin-left: 45%;
+}
+
+.custom-container{
+  width: 64%;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+}
