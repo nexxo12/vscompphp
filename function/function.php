@@ -48,6 +48,24 @@ function autonumber_db($id){
   return $format;
 }
 
+function autonumber_supplier($id){
+  global $conn;
+  $query = "SELECT MAX($id) AS kode FROM supplier";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_assoc($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $tambah_id = $kode+1; // data di increment
+  $tahun = date("Y");
+  if (strlen($tambah_id) == 1) {
+      $format = $tahun.$tambah_id;
+  }
+  else {
+    $format = $tambah_id;
+  }
+
+  return $format;
+}
+
 function tambahdata($data){
   global $conn;
   $id_barang = $data["id_barang"];//data diterima berupa array / banyak data dengan format $POST[id_barang]
@@ -59,14 +77,30 @@ function tambahdata($data){
     $query = "INSERT INTO master_barang (`ID_BARANG`, `NAMA_BARANG`, `STOK`, `SATUAN`, `HARGA_JUAL`, `STATUS`) VALUES ('$id_barang[$i]','$nama_barang[$i]','','$satuan[$i]','$harga[$i]','') ";
     $hasil = mysqli_query ($conn,$query);
   }
-
-
-  return $hasil;
 }
+
+function tambahdata_supp($data){
+    global $conn;
+    $id_barang = $data["id_supp"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+    $nama_supp = htmlspecialchars($data["nama_supp"]);
+    $alamat = htmlspecialchars($data["alamat"]);
+    $hp = htmlspecialchars($data["hp"]);
+    $query = "INSERT INTO supplier (`ID_SUPP`, `NAMA`, `ALAMAT`, `NO_HP`) VALUES ('$id_barang','$nama_supp','$alamat','$hp') ";
+    $hasil = mysqli_query ($conn,$query);
+    return $hasil;
+  }
+
 
 function deletedata($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
   global $conn;
   $hasil = mysqli_query ($conn,"DELETE FROM master_barang WHERE ID_BARANG= '$id'");
+  return $hasil;
+
+}
+
+function deletesupplier($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
+  global $conn;
+  $hasil = mysqli_query ($conn,"DELETE FROM supplier WHERE ID_SUPP= '$id'");
   return $hasil;
 
 }
@@ -78,6 +112,19 @@ function editbarang($data){// value $data diterima dari edit-barang.php berupa $
   $satuan = $data["satuan"];
   $harga = $data["harga"];
   $query = "UPDATE master_barang SET NAMA_BARANG = '$nama_barang', SATUAN = '$satuan', HARGA_JUAL = '$harga' WHERE ID_BARANG = '$id_barang' ;";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
+function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_POST
+  global $conn;
+  $id_supp = $data["id_supp"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+  $nama_supp = $data["nama_supp"];
+  $alamat = $data["alamat"];
+  $hp = $data["hp"];
+  $query = "UPDATE supplier SET NAMA = '$nama_supp', ALAMAT = '$alamat', NO_HP = '$hp' WHERE ID_SUPP = $id_supp";
   $hasil = mysqli_query ($conn,$query);
   return $hasil;
 

@@ -113,16 +113,20 @@
                 //var_dump($_POST);
 
                 if (tambahdata($_POST) > 0) {
-                    echo "<div class=\"alert alert-success\" id=\"alert\">
-                    <strong>Success!</strong> Data Berhasil Disimpan!!
-                    </div>";
+                    echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
+                        <strong>Sukses!</strong> Data berhasil disimpan!!
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                        <span aria-hidden=\"true\">&times;</span>
+                        </button></div>";
 
                 }
 
                 else {
-                  echo "<div class=\"alert alert-danger\" id=\"alert\">
-                  <strong>Failed!</strong> Data Gagal Disimpan!!
-                  </div>";
+                    echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
+                        <strong>Gagal!</strong> Data gagal disimpan, cek ulang!!
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+                        <span aria-hidden=\"true\">&times;</span>
+                        </button></div>";
                 }
 
               }
@@ -138,7 +142,7 @@
     </form><br><br>
 
     <table class="table table-bordered ">
-      <thead class="thead-dark">
+      <thead class="thead-dark text-center">
         <tr>
           <th scope="col" width="5%">No.</th>
           <th scope="col" width="6%">ID</th>

@@ -44,90 +44,66 @@
     <!-- master supplier start -->
     <div class="tab-pane fade  show active" id="master-supplier" role="tabpanel" aria-labelledby="contact-tab">
       <div class="form-input">
-          <form class="" action="" method="POST">
-          <table>
-            <tr>
-              <td><button class="btn btn-success" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah Data</button></a></td>
-            </tr>
-        </table>
-        </form>
 
-
-
-        <!-- php untuk input jumlah data -->
         <?php
-            $autonumber_db = autonumber_supplier("ID_SUPP");//memanggil function autonumber
-            if(isset($_POST["tambah"])){
-              //$jumlah di looping
+          $id = $_GET["id"];//data id diterima dari master-barang.php
+          $data_supp = tampil_data("SELECT * FROM supplier WHERE ID_SUPP = '$id'")[0];
+         ?>
 
-
-        ?>
         <form class="" action="" method="post">
         <table class="table-group" id="form" cellpadding="4" align="center">
           <tr>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">ID Supplier</label>
-              <input class="form-control input-kategori" type="text" name="id_supp" value="<?= $autonumber_db; ?>" readonly>
+              <input class="form-control input-kategori" type="text" name="id_supp" value="<?= $data_supp["ID_SUPP"]; ?>" readonly>
               </div>
             </td>
             <td>
-              <div class="form-group">
-              <label for="exampleInputEmail1">Nama Supplier</label>
-              <input class="form-control" type="text" name="nama_supp" placeholder="">
-              </div>
-
+                <div class="form-group">
+                <label for="exampleInputEmail1">Alamat</label>
+                <input class="form-control" type="text" name="nama_supp" placeholder="" value="<?= $data_supp["NAMA"]; ?>">
+                </div>
             </td>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">Alamat</label>
-              <input class="form-control input-barang" type="text" name="alamat" placeholder="">
+              <input class="form-control input-barang" type="text" name="alamat" placeholder="" value="<?= $data_supp["ALAMAT"]; ?>">
               </div>
             </td>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">No HP</label>
-              <input class="form-control input-harga" name="hp" type="text" placeholder="08xxxxxx">
+              <input class="form-control input-harga" name="hp" type="text" placeholder="" value="<?= $data_supp["NO_HP"]; ?>">
               </div>
             </td>
           </tr>
-      </table>
-
-          <button class="btn btn-submit btn-success" id="save" type="submit" name="save"><i class="fas fa-save mr-2"></i>Save</button><br><br>
+        </table>
+          <button class="btn btn-submit btn-success" id="save" type="submit" name="update"><i class="fas fa-save mr-2"></i>Update</button><br><br>
           </form>
-        <!--php penutup if  -->
-        <?php
-            }
-         ?>
 
-         <!-- php untuk tombol save -->
-         <?php
+          <!-- php untuk kondisi tombol save ditekan -->
+           <?php
+           if (isset($_POST["update"])) {
+             if (editsupp($_POST) > 0) {
+               echo "
+                   <script>
+                   alert('Data Berhasil Diupdate!!');
+                   document.location.href = '../admin/master-supplier.php';
+                   </script>
+               ";
 
-             if(isset($_POST["save"])){
-                //var_dump($_POST);
+             }
 
-                if (tambahdata_supp($_POST) > 0) {
-                    echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
-                          <strong>Sukses!</strong> Data berhasil disimpan!!
-                          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-                          <span aria-hidden=\"true\">&times;</span>
-                          </button></div>";
-
-                }
-
-                else {
-                    echo "<div class=\"alert alert-danger alert-dismissible fade show\" role=\"alert\">
-                        <strong>Gagal!</strong> Data gagal disimpan, cek ulang!!
-                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-                        <span aria-hidden=\"true\">&times;</span>
-                        </button></div>";
-                }
-
-              }
-          ?>
-          <!-- end php -->
-        <br>
-
+             else {
+               echo "
+                   <script>
+                   alert('Data Gagal Diupdate!!');
+                   </script>
+               ";
+             }
+           }
+            ?>
 
 
     <form class="form-inline" style="float:right" action="" method="post">
@@ -149,12 +125,6 @@
       <?php
         $no=1;
         $data_supplier = tampil_data("SELECT * FROM supplier");
-        //start untuk pencarian
-        //if (isset($_POST["cari"])) {//name 'cari' dari form pencarian
-        //  $data_barang = caribarang($_POST["keyword"]);//$data_barang ditumpuk dengan value keyword, dikirim ke function.php
-        //}
-        //end pencarian
-
         foreach ($data_supplier as $supplier) :?>
 
         <tbody>
