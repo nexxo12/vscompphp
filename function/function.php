@@ -50,7 +50,7 @@ function autonumber_db($id){
 
 function tambahdata($data){
   global $conn;
-  $id_barang = $data["id_barang"];//data diterima berupa array / banyak data
+  $id_barang = $data["id_barang"];//data diterima berupa array / banyak data dengan format $POST[id_barang]
   $nama_barang = $data["nama_barang"];
   $satuan = $data["satuan"];
   $harga = $data["harga"];
@@ -71,4 +71,24 @@ function deletedata($id){//data value $id diterima dari delete.php yang berupa i
 
 }
 
- ?>
+function editbarang($data){// value $data diterima dari edit-barang.php berupa $_POST
+  global $conn;
+  $id_barang = $data["id_barang"];//DATA diterima berupa $POST["id_barang"] <== dari inputan di edit-barang.php dst
+  $nama_barang = $data["nama_barang"];
+  $satuan = $data["satuan"];
+  $harga = $data["harga"];
+  $query = "UPDATE master_barang SET NAMA_BARANG = '$nama_barang', SATUAN = '$satuan', HARGA_JUAL = '$harga' WHERE ID_BARANG = '$id_barang' ;";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
+function caribarang($cari){
+
+$query = "SELECT * FROM master_barang WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
+return tampil_data($query);
+
+}
+
+?>

@@ -40,103 +40,76 @@
 
     <!-- tab master barang -->
     <div class="tab-pane fade  show active" id="master-barang" role="tabpanel" aria-labelledby="profile-tab">
+        <br><br>
 
-      <div class="form-input">
-          <form class="" action="" method="POST">
-          <table>
-            <tr>
-              <td><input class="form-control" type="text" placeholder="Jumlah Data" name="jumlah" required></td>
-              <td><button class="btn btn-success" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button></a></td>
-            </tr>
-        </table>
-        </form>
-
-
-
-        <!-- php untuk input jumlah data -->
         <?php
-            $autonumber_db = autonumber_db("ID_BARANG");//memanggil function autonumber
-            if(isset($_POST["tambah"])){
-              //value data di tampung divariabel jumlah
-              $jumlah = $_POST["jumlah"];
-              //$jumlah di looping
-              for ($i=1; $i <= $jumlah ; $i++) {
+          $id = $_GET["id"];//data id diterima dari master-barang.php
+          $barang = tampil_data("SELECT * FROM master_barang WHERE ID_BARANG = '$id'")[0];
 
-        ?>
+         ?>
+
         <form class="" action="" method="post">
-        <table class="table-group" id="form" cellpadding="4">
+        <table class="table-group" id="form" cellpadding="4" align="center">
           <tr>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">ID Barang</label>
-              <input class="form-control input-kategori" type="text" name="id_barang[]" value="<?= $autonumber_db++; ?>" readonly>
+              <input class="form-control input-kategori" type="text" name="id_barang" value="<?= $barang["ID_BARANG"]; ?>" readonly>
               </div>
             </td>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">Nama barang</label>
-              <input class="form-control input-barang" type="text" name="nama_barang[]" placeholder="Nama barang (diawali : Prosessor, RAM, dst)">
+              <input class="form-control input-barang" type="text" name="nama_barang" value="<?= $barang["NAMA_BARANG"]; ?>">
               </div>
 
             </td>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">Satuan</label>
-              <input class="form-control" type="text" name="satuan[]" placeholder="Satuan">
+              <input class="form-control" type="text" name="satuan" value="<?= $barang["SATUAN"]; ?>">
               </div>
             </td>
             <td>
               <div class="form-group">
               <label for="exampleInputEmail1">Harga</label>
-              <input class="form-control input-harga" name="harga[]" type="text" placeholder="Rp.">
+              <input class="form-control input-harga" name="harga" type="text" value="<?= $barang["HARGA_JUAL"]; ?>">
               </div>
             </td>
           </tr>
       </table>
+      <button class="btn btn-submit btn-success" id="save" type="submit" name="update"><i class="fas fa-upload mr-2"></i>Update</button>
+    </form>
 
-        <!-- php penutup for -->
-        <?php
-            }
+    <!-- php untuk kondisi tombol save ditekan -->
+     <?php
+     if (isset($_POST["update"])) {
+       if (editbarang($_POST) > 0) {
+         echo "
+             <script>
+             alert('Data Berhasil Diupdate!!');
+             document.location.href = '../admin/master-barang.php';
+             </script>
+         ";
 
-        ?>
-          <button class="btn btn-submit btn-success" id="save" type="submit" name="save"><i class="fas fa-save mr-2"></i>Save</button><br><br>
-          </form>
-        <!--php penutup if  -->
-        <?php
-            }
-         ?>
+       }
 
-         <!-- php untuk tombol save -->
-         <?php
-
-             if(isset($_POST["save"])){
-                //var_dump($_POST);
-
-                if (tambahdata($_POST) > 0) {
-                    echo "<div class=\"alert alert-success\" id=\"alert\">
-                    <strong>Success!</strong> Data Berhasil Disimpan!!
-                    </div>";
-
-                }
-
-                else {
-                  echo "<div class=\"alert alert-danger\" id=\"alert\">
-                  <strong>Failed!</strong> Data Gagal Disimpan!!
-                  </div>";
-                }
-
-              }
-          ?>
-          <!-- end php -->
-        <br>
+       else {
+         echo "
+             <script>
+             alert('Data Gagal Diupdate!!');
+             document.location.href = '../admin/edit-barang.php';
+             </script>
+         ";
+       }
+     }
+      ?>
 
 
-
-    <form class="form-inline" style="float:right" action="" method="post">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" autofocus>
-      <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
+    <form class="form-inline" style="float:right" action="#">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
     </form><br><br>
-
     <table class="table table-bordered ">
       <thead class="thead-dark">
         <tr>
@@ -152,12 +125,6 @@
       <?php
         $no=1;
         $data_barang = tampil_data("SELECT * FROM master_barang");
-        //start untuk pencarian
-        if (isset($_POST["cari"])) {//name 'cari' dari form pencarian
-          $data_barang = caribarang($_POST["keyword"]);//$data_barang ditumpuk dengan value keyword, dikirim ke function.php
-        }
-        //end pencarian
-
         foreach ($data_barang as $barang) :?>
 
         <tbody>
