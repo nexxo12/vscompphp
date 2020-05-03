@@ -112,7 +112,7 @@
              if(isset($_POST["save"])){
                 //var_dump($_POST);
 
-                if (tambahdata($_POST) > 0) {
+                if (tambahdata($_POST) == 0) {
                     echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
                         <strong>Sukses!</strong> Data berhasil disimpan!!
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -155,7 +155,20 @@
       </thead>
       <?php
         $no=1;
-        $data_barang = tampil_data("SELECT * FROM master_barang");
+        //conf pagenation
+        $jumlahtampil = 7;//set tampil data perhalaman
+        $jumlahdata = count(tampil_data("SELECT * FROM master_barang"));//menghitung jumlah data di masterbarang
+        $jumlahhalaman = ceil($jumlahdata / $jumlahtampil); // menampilkan jumlah halaman (page), ceil = membulatkan angka keatas (1,2 = 2, dst)
+        //menentukan halaman aktif
+        if (isset($_GET["page"])) {//jika ada kiriman page
+          $halamanaktif = $_GET["page"];//set halaman sesuai page = n
+        }else {
+          $halamanaktif = 1;//set halaman = 1
+        }
+        $awaldata = ($jumlahtampil * $halamanaktif) - $jumlahtampil; // set awal mulai index setiap page
+        $data_barang = tampil_data("SELECT * FROM master_barang LIMIT $awaldata, $jumlahtampil");//menampilkan data limit index awal - akhir
+        //end conf pagenation
+
         //start untuk pencarian
         if (isset($_POST["cari"])) {//name 'cari' dari form pencarian
           $data_barang = caribarang($_POST["keyword"]);//$data_barang ditumpuk dengan value keyword, dikirim ke function.php
@@ -185,6 +198,40 @@
        ?>
 
     </table>
+    <!-- pagenation -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination" style="float:right;">
+          <li class="page-item">
+            <?php if ($halamanaktif > 1) : ?>
+              <a class="page-link" href="?page=<?=$halamanaktif - 1; ?>" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            <?php endif;  ?>
+            </a>
+          </li>
+          <!-- logic navigation -->
+          <?php for ($i=1; $i <= $jumlahhalaman ; $i++) {
+            if ($i == $halamanaktif) { ?>
+              <li class="page-item active"><a class="page-link" href="?page=<?=$i ?>"><?=$i ?></a></li>
+            <?php
+            }
+            else {?>
+              <li class="page-item"><a class="page-link" href="?page=<?=$i ?>"><?=$i ?></a></li>
+            <?php
+            }
+          }
+            ?>
+
+          <li class="page-item">
+            <?php if ($halamanaktif < $jumlahhalaman) : ?>
+              <a class="page-link" href="?page=<?=$halamanaktif + 1; ?>" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            <?php endif;  ?>
+
+            </a>
+          </li>
+        </ul>
+    </nav>
+    <!-- end pagenation -->
     </div>
   </div> <!-- end master barang -->
 

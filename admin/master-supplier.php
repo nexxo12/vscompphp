@@ -106,7 +106,7 @@
              if(isset($_POST["save"])){
                 //var_dump($_POST);
 
-                if (tambahdata_supp($_POST) > 0) {
+                if (tambahdata_supp($_POST) == 0) {
                     echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
                           <strong>Sukses!</strong> Data berhasil disimpan!!
                           <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -150,20 +150,19 @@
         $no=1;
         $data_supplier = tampil_data("SELECT * FROM supplier");
         //start untuk pencarian
-        //if (isset($_POST["cari"])) {//name 'cari' dari form pencarian
-        //  $data_barang = caribarang($_POST["keyword"]);//$data_barang ditumpuk dengan value keyword, dikirim ke function.php
-        //}
+        if (isset($_POST["cari"])) {//name 'cari' dari form pencarian
+        $data_supplier = carisupp($_POST["keyword"]);//$data_supplier ditumpuk dengan value keyword, dikirim ke function.php
+        }
         //end pencarian
 
         foreach ($data_supplier as $supplier) :?>
-
         <tbody>
           <tr>
-            <td align="center"><?= $no ?></td>
-            <td align="center"><?= $supplier["ID_SUPP"]; ?></td>
-            <td><?= $supplier["NAMA"]; ?></td>
-            <td align="center"><?= $supplier["ALAMAT"]; ?></td>
-            <td align="center"><?= $supplier["NO_HP"]; ?></td>
+            <td align="center" name="no"><?= $no ?></td>
+            <td align="center" name="supp"><?= $supplier["ID_SUPP"]; ?></td>
+            <td name="nama"><?= $supplier["NAMA"]; ?></td>
+            <td align="center" name="alamat"><?= $supplier["ALAMAT"]; ?></td>
+            <td align="center" name="nohp"><?= $supplier["NO_HP"]; ?></td>
             <td>
                 <a href="edit-supplier.php?id=<?=$supplier["ID_SUPP"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
                 <a href="delete-supplier.php?id=<?=$supplier["ID_SUPP"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button></a>

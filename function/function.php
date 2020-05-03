@@ -132,8 +132,13 @@ function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_
 }
 
 function caribarang($cari){
-
 $query = "SELECT * FROM master_barang WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
+return tampil_data($query);
+
+}
+
+function carisupp($cari){
+$query = "SELECT * FROM supplier WHERE ID_SUPP LIKE '%$cari%' OR NAMA LIKE '%$cari%'";
 return tampil_data($query);
 
 }
