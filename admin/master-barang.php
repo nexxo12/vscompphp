@@ -155,7 +155,6 @@
         </tr>
       </thead>
       <?php
-        $no=1;
         //conf pagenation
         $jumlahtampil = 7;//set tampil data perhalaman
         $jumlahdata = count(tampil_data("SELECT * FROM master_barang"));//menghitung jumlah data di masterbarang
@@ -163,9 +162,12 @@
         //menentukan halaman aktif
         if (isset($_GET["page"])) {//jika ada kiriman page
           $halamanaktif = $_GET["page"];//set halaman sesuai page = n
+          $nomor = ($halamanaktif-1) * $jumlahtampil;
         }else {
           $halamanaktif = 1;//set halaman = 1
+          $nomor = 0;
         }
+        $no = $nomor+1;
         $awaldata = ($jumlahtampil * $halamanaktif) - $jumlahtampil; // set awal mulai index setiap page
         $data_barang = tampil_data("SELECT * FROM master_barang LIMIT $awaldata, $jumlahtampil");//menampilkan data limit index awal - akhir
         //end conf pagenation
@@ -219,6 +221,7 @@
               <li class="page-item"><a class="page-link" href="?page=<?=$i ?>"><?=$i ?></a></li>
             <?php
             }
+            $no++;
           }
             ?>
 

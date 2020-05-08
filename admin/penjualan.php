@@ -44,16 +44,19 @@
     <div class="card">
       <h5 class="card-header">Penjualan</h5>
     <div class="card-body">
+      <a href="history-penjualan.php"><p style="position:absolute; left:85%; top:1.5%;">History penjualan &raquo</p></a>
     <form class="" action="" method="post">
     <table class="table-group" id="form" cellpadding="3" align="center" width="80%" border="0">
       <tr>
         <?php $autonumber_db = autonumber_inv("id_inv"); ?>
+        <?php $autonumber_pj = autonumber_pj("ID_PENJUALAN"); ?>
         <td width=""><label for="exampleInputEmail1">No. Faktur</label></td>
         <td width="1%">:</td>
         <td>
 
           <div class="form-group">
                 <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db++;  ?>" readonly>
+                <input type="hidden" name="id_pjforinv" value="<?=$autonumber_pj ?>">
           </div>
         </td>
         <td width="30%"></td>
@@ -200,6 +203,7 @@
       $harga_total = $jumlah * $harga;//end
 
       //mengambil data dari inputan
+      $id_list = $_POST["id_pjforinv"];
       $inv = $_POST["id_pj"];
       $cust = $_POST["customer"];
       $id_barang = $_POST["id_barang"];
@@ -208,7 +212,7 @@
       $h_awal = $_POST["harga_awal"];
       $jumlah = $_POST["jumlah"];
       $h_jual = $_POST["harga_jual"];
-      $query = "INSERT INTO list_penjualan VALUES ('','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total') ";
+      $query = "INSERT INTO list_penjualan VALUES ('$id_list','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total') ";
       $hasil = mysqli_query ($conn,$query);
       if ($hasil > 0) {
         echo "";
@@ -238,7 +242,9 @@
       <?php
       $no=1;
       $tampil_pj = tampil_data("SELECT * FROM list_penjualan INNER JOIN master_barang ON list_penjualan.ID_BARANG=master_barang.ID_BARANG");?>
-      <?php foreach ($tampil_pj as $list_pj) :?>
+      <?php foreach ($tampil_pj as $list_pj) :
+        $barang = $list_pj["NAMA_BARANG"];
+      ?>
       <tr>
         <td><?=$no; ?></td>
         <td><?=$list_pj["NAMA_BARANG"]; ?></td>
@@ -303,13 +309,13 @@
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-submit btn-success mt-2" id="save" type="submit" name="simpan"><i class="fas fa-save mr-2"></i>Simpan</button><br><br>
+  <button class="btn btn-submit btn-success mt-2" id="save" type="submit" name="simpan"><i class="fas fa-shopping-cart mr-2"></i>Checkout</button><br><br>
   <?php
   if (isset($_POST["simpan"])) {
       global $conn;
       $inv = $_POST["id_pj"];
       $tgl = $_POST["tgl"];
-      $query = "INSERT INTO inv_penjualan VALUES ('$inv','$tgl','$total_harga2') ";
+      $query = "INSERT INTO inv_penjualan VALUES ('$inv','$tgl','$barang','$total_harga2') ";
       $del_list = deletepembelian("TRUNCATE TABLE list_penjualan");
       $hasil = mysqli_query ($conn,$query);
       if ($hasil > 0) {

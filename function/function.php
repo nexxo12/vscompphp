@@ -77,7 +77,7 @@ function autonumber_inv($id){
   $hasil = mysqli_query ($conn,$query);
   $data = mysqli_fetch_assoc($hasil);
   $kode = $data["kode"]; //mengambil data 'kode'
-  $short_id = substr ($kode, 3, 5); 
+  $short_id = substr ($kode, 3, 5);
   $tambah_id = $short_id+1; // data di increment
   //kondisi jika jumlah angka 1, misal 1,2,3,4,dst
   if (strlen($tambah_id)==1) {
@@ -97,6 +97,17 @@ function autonumber_inv($id){
       $format = "INV".$tambah_id;
   }
   return $format;
+}
+
+function autonumber_pj($id){
+  global $conn;
+  $query = "SELECT MAX(ID_PENJUALAN) AS kode FROM penjualan";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_array($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $kode++;
+
+  return $kode;
 }
 
 function autonumber_supplier($id){
