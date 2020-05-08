@@ -50,7 +50,7 @@
             </tr>
         </table>
         </form>
-
+        <br>
 
 
         <!-- php untuk input jumlah data -->
@@ -64,7 +64,7 @@
 
         ?>
         <form class="" action="" method="post">
-        <table class="table-group" id="form" cellpadding="4">
+        <table class="table-group" id="form" cellpadding="4" align="center">
           <tr>
             <td>
               <div class="form-group">
@@ -127,6 +127,7 @@
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                         <span aria-hidden=\"true\">&times;</span>
                         </button></div>";
+                        echo mysqli_error($conn);
                 }
 
               }

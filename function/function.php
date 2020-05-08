@@ -1,6 +1,7 @@
 
 <?php
 //untuk konek database
+  date_default_timezone_set('Asia/Jakarta');
  $conn= mysqli_connect ("localhost","root","","coba_penjualan");
  if($conn){
    echo "";
@@ -48,6 +49,56 @@ function autonumber_db($id){
   return $format;
 }
 
+function autonumber_beli($id){
+  global $conn;
+  $query = "SELECT MAX($id) AS kode FROM pembelian_barang";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_assoc($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $short_id = substr ($kode, 2, 3); //data id dibagi 2 angka depan 3 angka setelahnya (BR000)
+  $tambah_id = $short_id+1; // data di increment
+  //kondisi jika jumlah angka 1, misal 1,2,3,4,dst
+  if (strlen($tambah_id)==1) {
+      $format = "BL00".$tambah_id;
+  }
+  //kondisi jika jumlah angka 2, misal = 12,20,22,dst
+  elseif (strlen($tambah_id)==2) {
+      $format = "BL0".$tambah_id;
+  }
+  else {
+      $format = "BL".$tambah_id;
+  }
+  return $format;
+}
+
+function autonumber_inv($id){
+  global $conn;
+  $query = "SELECT MAX($id) AS kode FROM inv_penjualan";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_assoc($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $short_id = substr ($kode, 3, 5); 
+  $tambah_id = $short_id+1; // data di increment
+  //kondisi jika jumlah angka 1, misal 1,2,3,4,dst
+  if (strlen($tambah_id)==1) {
+      $format = "INV0000".$tambah_id;
+  }
+  //kondisi jika jumlah angka 2, misal = 12,20,22,dst
+  elseif (strlen($tambah_id)==2) {
+      $format = "INV000".$tambah_id;
+  }
+  elseif (strlen($tambah_id)==3) {
+      $format = "INV00".$tambah_id;
+  }
+  elseif (strlen($tambah_id)==4) {
+      $format = "INV0".$tambah_id;
+  }
+  else {
+      $format = "INV".$tambah_id;
+  }
+  return $format;
+}
+
 function autonumber_supplier($id){
   global $conn;
   $query = "SELECT MAX($id) AS kode FROM supplier";
@@ -85,15 +136,41 @@ function tambahdata_supp($data){
     $nama_supp = htmlspecialchars($data["nama_supp"]);
     $alamat = htmlspecialchars($data["alamat"]);
     $hp = htmlspecialchars($data["hp"]);
-    $query = "INSERT INTO supplier (`ID_SUPP`, `NAMA`, `ALAMAT`, `NO_HP`) VALUES ('$id_barang','$nama_supp','$alamat','$hp') ";
+    $query = "INSERT INTO supplier VALUES ('$id_barang','$nama_supp','$alamat','$hp') ";
     $hasil = mysqli_query ($conn,$query);
     return $hasil;
   }
+
+function tambahdata_beli($data){
+      global $conn;
+      $id_beli = $data["id_beli"];
+      $id_supp = $data["supp"];
+      $id_barang = $data["id_barang"];
+      $id_login = $data["id_login"];
+      $satuan = $data["satuan"];
+      $jumlah = $data["jumlah"];
+      $harga = $data["harga"];
+      $tgl = $data["tgl"];
+      $query = "INSERT INTO pembelian_barang VALUES ('$id_beli','$id_supp','$id_barang','$id_login', '$jumlah', '$satuan', '$harga', '$tgl') ";
+      $hasil = mysqli_query ($conn,$query);
+      mysqli_error($conn);
+      return $hasil;
+      var_dump($data);
+}
 
 
 function deletedata($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
   global $conn;
   $hasil = mysqli_query ($conn,"DELETE FROM master_barang WHERE ID_BARANG= '$id'");
+  return $hasil;
+
+}
+
+function deletepembelian($query){
+  //menjadikan @conn variabel global
+  global $conn;
+  //variabel hasil yang menyimpan data dari db
+  $hasil = mysqli_query ($conn,$query);
   return $hasil;
 
 }

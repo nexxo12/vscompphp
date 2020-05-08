@@ -51,7 +51,7 @@
             </tr>
         </table>
         </form>
-
+        <br>
 
 
         <!-- php untuk input jumlah data -->
@@ -106,7 +106,7 @@
              if(isset($_POST["save"])){
                 //var_dump($_POST);
 
-                if (tambahdata_supp($_POST) == 0) {
+                if (tambahdata_supp($_POST) > 0) {
                     echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
                           <strong>Sukses!</strong> Data berhasil disimpan!!
                           <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
@@ -121,6 +121,7 @@
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
                         <span aria-hidden=\"true\">&times;</span>
                         </button></div>";
+                        echo mysqli_error($conn);
                 }
 
               }

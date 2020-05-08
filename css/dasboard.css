@@ -37,6 +37,9 @@ a.dropdown-item{
 .form-group > .input-kategori{
   width: 170px;
 }
+.input-pj{
+  width: 20px;
+}
 
 .btn-submit{
   margin-left: 45%;
