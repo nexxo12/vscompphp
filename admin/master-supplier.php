@@ -107,11 +107,17 @@
                 //var_dump($_POST);
 
                 if (tambahdata_supp($_POST) > 0) {
-                    echo "<div class=\"alert alert-success alert-dismissible fade show\" role=\"alert\">
-                          <strong>Sukses!</strong> Data berhasil disimpan!!
-                          <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
-                          <span aria-hidden=\"true\">&times;</span>
-                          </button></div>";
+
+                    echo "<script language=\"javascript\">
+                    swal({
+                          title: \"Berhasil!\",
+                          text: \"Data supplier berhasil ditambah!\",
+                          icon: \"success\",
+                          button: \"OK\",
+                        });
+
+                    </script>";
+
 
                 }
 

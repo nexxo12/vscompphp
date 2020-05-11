@@ -8,10 +8,7 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style3.css">
   <link rel="stylesheet" href="fontawesome/css/all.min.css">
-  <script src="js/jquery-3.4.1.slim.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="fontawesome/js/all.min.js"></script>
+
 </head>
 <body id="page-top">
 

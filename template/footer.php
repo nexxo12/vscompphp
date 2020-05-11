@@ -69,6 +69,10 @@
 </div>
 </div>
 
+<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="fontawesome/js/all.min.js"></script>
 <!--script animasi scroll menu nav-->
 <script type="text/javascript">
 window.onscroll = function() {scrollFunction()};

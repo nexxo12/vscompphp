@@ -70,24 +70,6 @@
         </td>
       </tr>
       <tr>
-        <td width=""><label for="exampleInputEmail1">Customer</label></td>
-        <td width="1%">:</td>
-        <td>
-
-          <div class="form-group">
-                <input class="form-control mt-3" type="text" name="customer" value="1" readonly>
-          </div>
-        </td>
-        <td width=""></td>
-        <td><label for="exampleInputEmail1">Kasir</label></td>
-        <td>:</td>
-        <td>
-          <div class="form-group">
-          <input class="form-control mt-2" type="text" name="kasir" placeholder="" value="1" readonly>
-          </div>
-        </td>
-      </tr>
-      <tr>
         <td width=""><label for="exampleInputEmail1">Barang</label></td>
         <td width="1%">:</td>
 
@@ -108,6 +90,29 @@
           <div class="input-group-prepend">
             <button class="btn btn-primary launch-modal" type="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-search"></i></button>
           </div>
+          </div>
+        </td>
+        <td width=""></td>
+        <td><label for="exampleInputEmail1">Kasir</label></td>
+        <td>:</td>
+        <td>
+          <div class="form-group">
+          <input class="form-control mt-2" type="text" name="kasir" placeholder="" value="1" readonly>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td width=""><label for="exampleInputEmail1">Customer</label></td>
+        <td width="1%">:</td>
+        <td>
+          <div class="form-group mt-3">
+            <select class="form-control" name="customer" required>
+              <?php $data_cust = tampil_data("SELECT * FROM pelanggan"); ?>
+              <?php foreach ($data_cust as $cust) :?>
+              <option value="<?= $cust["ID_PELANGGAN"]; ?>"><?=$cust["NAMA"]; ?></option>
+              <?php endforeach; ?>
+
+            </select>
           </div>
         </td>
       </tr>
@@ -309,34 +314,20 @@
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-submit btn-success mt-2" id="save" type="submit" name="simpan"><i class="fas fa-shopping-cart mr-2"></i>Checkout</button><br><br>
+</form>
+
+<!-- Checkout ajax jquery -->
+<form class="checkout" action="checkout.php" method="post">
+  <?php $autonumber_db = autonumber_inv("id_inv"); ?>
+  <input type="hidden" name="id_pj" value="<?= $autonumber_db; ?>">
+  <input type="hidden" name="tgl" value="<?=$tgl; ?>">
+  <input type="hidden" name="total" value="<?=$total_harga2; ?>">
+  <input type="hidden" name="nama_barang" value="<?= $barang; ?>">
+  <button class="btn btn-submit btn-success mt-2"  type="submit" name="simpan"><i class="fas fa-shopping-cart mr-2"></i>Checkout</button><br><br>
   <?php
   if (isset($_POST["simpan"])) {
       global $conn;
-      $inv = $_POST["id_pj"];
-      $tgl = $_POST["tgl"];
-      $query = "INSERT INTO inv_penjualan VALUES ('$inv','$tgl','$barang','$total_harga2') ";
-      $del_list = deletepembelian("TRUNCATE TABLE list_penjualan");
-      $hasil = mysqli_query ($conn,$query);
-      if ($hasil > 0) {
 
-        echo "
-            <script>
-            document.location.href = '../admin/penjualan.php';
-            </script>
-        ";
-      }
-      elseif ($del_list > 0) {
-        echo "
-            <script>
-            document.location.href = '../admin/penjualan.php';
-            </script>
-        ";
-
-      }
-      else {
-        echo mysqli_error($conn);
-      }
 
   }
 
@@ -345,9 +336,9 @@
   </div>
   </div>
   </form>
+<!-- end checkout -->
 
-
-  <!-- modal -->
+  <!-- modal barang -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-backdrop="static">
       <div class="modal-content">
@@ -398,6 +389,34 @@
         </div>
         <!-- end modal -->
 
+        <!-- Modal Print -->
+        <div class="modal fade" id="ModalPrint">
+          <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Cetak</h4>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <img style="width:71%; height:71%; margin-left:15%; margin-bottom:8%;" src="../img/print2.gif" alt="print"><br>
+                <h5 align="center">Cetak Nota ?</h5>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer" >
+                <div class="button-print" style="margin-right:25%;">
+                  <?php $autonumber_db = autonumber_inv("id_inv"); ?>
+                  <a href="print.php?inv=<?=$autonumber_db; ?>" target="_blank"><button type="submit" class="btn btn-primary">Print</button></a>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="redirect();">Close</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div> <!-- end modal print -->
 
     </div> <!-- end penjualan -->
     <!-- tab master barang -->
@@ -415,7 +434,7 @@
 </div> <!-- end container -->
 
 <br><br><br><br><br>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
 	$('.launch-modal').click(function(){
 		$('#exampleModalCenter').modal({
@@ -424,5 +443,34 @@ $(document).ready(function(){
 	});
 });
 </script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.checkout').on('submit',function(e){//disable loading saat tekan tombol pada form class checkout
+      e.preventDefault();
+      $.ajax({ //menjalankan ajax
+          type:$(this).attr('method'), //menentukan post / get, (this) = form
+          url:$(this).attr('action'), //url untuk action pada form
+          data:$(this).serialize(), //data untuk mengambil dan input dari form inputan
+          success:function(){ //jika sukses
+            swal("Berhasil!", "Data berhasil disimpan!", "success").then((oke) => {
+              $('#ModalPrint').modal('show')
+              });
+          }
+
+      })
+    })
+  })
+
+</script>
+
+<script type="text/javascript">
+function redirect(){
+  document.location.href = 'penjualan.php';
+}
+
+
+</script>
+
 </body>
 </html>

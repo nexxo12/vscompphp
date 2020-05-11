@@ -51,7 +51,7 @@
             <th scope="col" width="">Nama Barang</th>
             <th scope="col" width="15%" class="text-center">Total Transaksi</th>
             <th scope="col" width="15%" class="text-center">Tanggal Transaksi</th>
-            <th scope="col" width="14%" class="text-center">Aksi</th>
+            <th scope="col" width="16%" class="text-center">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -65,7 +65,7 @@
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
               <a href="print.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
-              <button class="btn btn-danger" type="submit" name="delete" value=""><i class="fas fa-trash"></i></button>
+              <a href="delete-h.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-danger" type="submit" name="delete" value="" onclick="return confirm('Apakah anda yakin ?');"><i class="fas fa-trash"></i></button></a>
             </td>
           </tr>
         <?php endforeach; ?>

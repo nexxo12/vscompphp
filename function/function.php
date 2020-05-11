@@ -101,7 +101,18 @@ function autonumber_inv($id){
 
 function autonumber_pj($id){
   global $conn;
-  $query = "SELECT MAX(ID_PENJUALAN) AS kode FROM penjualan";
+  $query = "SELECT MAX($id) AS kode FROM penjualan";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_array($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $kode++;
+
+  return $kode;
+}
+
+function autonumber_cust($id){
+  global $conn;
+  $query = "SELECT MAX($id) AS kode FROM pelanggan";
   $hasil = mysqli_query ($conn,$query);
   $data = mysqli_fetch_array($hasil);
   $kode = $data["kode"]; //mengambil data 'kode'
@@ -151,6 +162,17 @@ function tambahdata_supp($data){
     $hasil = mysqli_query ($conn,$query);
     return $hasil;
   }
+
+  function tambahdata_cust($data){
+      global $conn;
+      $id_cust = $data["id_cust"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+      $nama = htmlspecialchars($data["nama"]);
+      $alamat = htmlspecialchars($data["alamat"]);
+      $hp = htmlspecialchars($data["hp"]);
+      $query = "INSERT INTO pelanggan VALUES ('$id_cust','$nama','$alamat','$hp') ";
+      $hasil = mysqli_query ($conn,$query);
+      return $hasil;
+    }
 
 function tambahdata_beli($data){
       global $conn;
