@@ -176,8 +176,9 @@
 
 
   function resetinput(){
-    $('[type=text]').val('');
     $('[name=alamat]').val('');
+    $('[name=nama]').val('');
+    $('[name=hp]').val('');
     $('[name=nama]').focus();
   }
 

@@ -66,20 +66,33 @@
         <form class="" action="" method="post">
         <table class="table-group" id="form" cellpadding="4" align="center">
           <tr>
-            <td>
+            <td width="10%">
               <div class="form-group">
               <label for="exampleInputEmail1">ID Barang</label>
-              <input class="form-control input-kategori" type="text" name="id_barang[]" value="<?= $autonumber_db++; ?>" readonly>
+              <input class="form-control" type="text" name="id_barang[]" value="<?= $autonumber_db++; ?>" readonly>
               </div>
             </td>
-            <td>
+            <td width="48%">
               <div class="form-group">
               <label for="exampleInputEmail1">Nama barang</label>
-              <input class="form-control input-barang" type="text" name="nama_barang[]" placeholder="Nama barang (diawali : Prosessor, RAM, dst)">
+              <input class="form-control" type="text" name="nama_barang[]" placeholder="Nama barang">
               </div>
 
             </td>
             <td>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Kategori</label>
+                <select class="form-control" name="kategori[]">
+                  <?php $data_kategori = tampil_data("SELECT * FROM kategori"); ?>
+                  <?php foreach ($data_kategori as $kategori) :?>
+                  <option value="<?= $kategori["ID_KATEGORI"]; ?>"><?=$kategori["KATEGORI"]; ?></option>
+                  <?php endforeach; ?>
+
+                </select>
+              </div>
+
+            </td>
+            <td width="10%">
               <div class="form-group">
               <label for="exampleInputEmail1">Satuan</label>
               <input class="form-control" type="text" name="satuan[]" placeholder="Satuan">
@@ -152,6 +165,7 @@
           <th scope="col" width="5%">No.</th>
           <th scope="col" width="6%">ID</th>
           <th scope="col" width="">Nama Barang</th>
+          <th scope="col" width="">Kategori</th>
           <th scope="col" width="4%">Jumlah</th>
           <th scope="col" width="5%">Satuan</th>
           <th scope="col" width="14%">Harga</th>
@@ -173,7 +187,7 @@
         }
         $no = $nomor+1;
         $awaldata = ($jumlahtampil * $halamanaktif) - $jumlahtampil; // set awal mulai index setiap page
-        $data_barang = tampil_data("SELECT * FROM master_barang LIMIT $awaldata, $jumlahtampil");//menampilkan data limit index awal - akhir
+        $data_barang = tampil_data("SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI LIMIT $awaldata, $jumlahtampil");//menampilkan data limit index awal - akhir
         //end conf pagenation
 
         //start untuk pencarian
@@ -189,9 +203,10 @@
             <td align="center"><?= $no ?></td>
             <td><?= $barang["ID_BARANG"]; ?></td>
             <td><?= $barang["NAMA_BARANG"]; ?></td>
+            <td align="center"><?= $barang["KATEGORI"]; ?></td>
             <td align="center"><?= $barang["STOK"]; ?></td>
             <td align="center"><?= $barang["SATUAN"]; ?></td>
-            <td>Rp. <?= number_format($barang["HARGA_JUAL"]); ?></td>
+            <td align="center">Rp. <?= number_format($barang["HARGA_JUAL"]); ?></td>
             <td>
                 <a href="edit-barang.php?id=<?=$barang["ID_BARANG"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
                 <a href="delete.php?id=<?=$barang["ID_BARANG"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button></a>

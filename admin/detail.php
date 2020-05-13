@@ -46,7 +46,7 @@
     <div class="card-body">
       <br><br>
       <?php $invoice = $_GET["id"]; ?>
-      <?php $data_pj = tampil_data("SELECT * FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG WHERE INV_PENJUALAN = '$invoice'")  ?>
+      <?php $data_pj = tampil_data("SELECT * FROM penjualan INNER JOIN master_barang ON penjualan.ID_BARANG=master_barang.ID_BARANG INNER JOIN pelanggan ON penjualan.ID_PELANGGAN=pelanggan.ID_PELANGGAN WHERE INV_PENJUALAN = '$invoice'")  ?>
       <?php foreach ($data_pj as $inv) :?>
       <?php endforeach; ?>
 
@@ -64,7 +64,7 @@
         <tr>
           <td><h5>Pelanggan</h5></td>
           <td><h5>:</h5></td>
-          <td><h5><?=$inv["ID_PELANGGAN"]; ?></h5></td>
+          <td><h5><?=$inv["NAMA"]; ?></h5></td>
         </tr>
         <tr>
           <td><h5>Kasir</h5></td>

@@ -44,27 +44,37 @@
 
         <?php
           $id = $_GET["id"];//data id diterima dari master-barang.php
-          $barang = tampil_data("SELECT * FROM master_barang WHERE ID_BARANG = '$id'")[0];
+          $barang = tampil_data("SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI WHERE ID_BARANG = '$id'")[0];
 
          ?>
 
         <form class="" action="" method="post">
         <table class="table-group" id="form" cellpadding="4" align="center">
           <tr>
-            <td>
+            <td width="10%">
               <div class="form-group">
               <label for="exampleInputEmail1">ID Barang</label>
-              <input class="form-control input-kategori" type="text" name="id_barang" value="<?= $barang["ID_BARANG"]; ?>" readonly>
+              <input class="form-control" type="text" name="id_barang" value="<?= $barang["ID_BARANG"]; ?>" readonly>
               </div>
             </td>
-            <td>
+            <td width="48%">
               <div class="form-group">
               <label for="exampleInputEmail1">Nama barang</label>
-              <input class="form-control input-barang" type="text" name="nama_barang" value="<?= $barang["NAMA_BARANG"]; ?>">
+              <input class="form-control" type="text" name="nama_barang" value="<?= $barang["NAMA_BARANG"]; ?>">
               </div>
 
             </td>
             <td>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Kategori</label>
+                <select class="form-control" name="kategori">
+                    <option value="<?= $barang["ID_KATEGORI"]; ?>"><?=$barang["KATEGORI"]; ?></option>
+
+                </select>
+              </div>
+
+            </td>
+            <td width="10%">
               <div class="form-group">
               <label for="exampleInputEmail1">Satuan</label>
               <input class="form-control" type="text" name="satuan" value="<?= $barang["SATUAN"]; ?>">
@@ -85,22 +95,22 @@
      <?php
      if (isset($_POST["update"])) {
        if (editbarang($_POST) > 0) {
-         echo "
-             <script>
-             alert('Data Berhasil Diupdate!!');
-             document.location.href = '../admin/master-barang.php';
-             </script>
-         ";
+         echo "<script language=\"javascript\">
+         swal({
+               title: \"Berhasil!\",
+               text: \"Data barang berhasil diubah!\",
+               icon: \"success\",
+               button: \"OK\",
+             }).then((oke) => {
+               document.location.href = 'master-barang.php';
+               });;
+
+         </script>";
 
        }
 
        else {
-         echo "
-             <script>
-             alert('Data Gagal Diupdate!!');
-             document.location.href = '../admin/edit-barang.php';
-             </script>
-         ";
+         echo mysqli_error($conn);
        }
      }
       ?>
@@ -116,6 +126,7 @@
           <th scope="col" width="5%">No.</th>
           <th scope="col" width="6%">ID</th>
           <th scope="col" width="">Nama Barang</th>
+          <th scope="col" width="">Kategori</th>
           <th scope="col" width="4%">Jumlah</th>
           <th scope="col" width="5%">Satuan</th>
           <th scope="col" width="14%">Harga</th>
@@ -124,7 +135,7 @@
       </thead>
       <?php
         $no=1;
-        $data_barang = tampil_data("SELECT * FROM master_barang");
+        $data_barang = tampil_data("SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI");
         foreach ($data_barang as $barang) :?>
 
         <tbody>
@@ -132,6 +143,7 @@
             <td align="center"><?= $no ?></td>
             <td><?= $barang["ID_BARANG"]; ?></td>
             <td><?= $barang["NAMA_BARANG"]; ?></td>
+            <td align="center"><?= $barang["KATEGORI"]; ?></td>
             <td align="center"><?= $barang["STOK"]; ?></td>
             <td align="center"><?= $barang["SATUAN"]; ?></td>
             <td>Rp. <?= number_format($barang["HARGA_JUAL"]); ?></td>

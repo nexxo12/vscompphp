@@ -324,15 +324,6 @@
   <input type="hidden" name="total" value="<?=$total_harga2; ?>">
   <input type="hidden" name="nama_barang" value="<?= $barang; ?>">
   <button class="btn btn-submit btn-success mt-2"  type="submit" name="simpan"><i class="fas fa-shopping-cart mr-2"></i>Checkout</button><br><br>
-  <?php
-  if (isset($_POST["simpan"])) {
-      global $conn;
-
-
-  }
-
-
-   ?>
   </div>
   </div>
   </form>

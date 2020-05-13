@@ -9,7 +9,7 @@ include'../function/function.php';
       <td><?= $cust["ALAMAT"]; ?></td>
       <td><?= $cust["HP"]; ?></td>
       <td>
-        <a href="#" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
+        <a class="update" href="update-cust.php?id=<?= $cust["ID_PELANGGAN"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
         <a class="hapus" href="delete-cust.php?id=<?= $cust["ID_PELANGGAN"]; ?>" ><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button>
       </td>
       </tr>

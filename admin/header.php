@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/dasboard.css">
   <link rel="stylesheet" href="../css/datatables.min.css">
+  <link rel="stylesheet" href="../css/datepicker.css">
   <link rel="stylesheet" href="../fontawesome/css/all.min.css">
   <script src="../js/jquery-3.5.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
@@ -15,6 +16,7 @@
   <script src="../fontawesome/js/all.min.js"></script>
   <script src="../js/sweetalert.min.js"></script>
   <script src="../js/datatables.min.js"></script>
+  <script src="../js/bootstrap-datepicker.js"></script>
 </head>
 <body>
 
