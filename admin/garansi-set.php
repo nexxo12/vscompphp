@@ -46,21 +46,23 @@
       <?php
         $id = $_GET["id"];//data id diterima dari master-barang.php
         $garansi = tampil_data("SELECT * FROM garansi INNER JOIN master_barang ON garansi.ID_BARANG = master_barang.ID_BARANG WHERE INV_PENJUALAN = '$id'")[0];
-
        ?>
+
        <form class="" action="" method="post">
        <table class="table-group" id="form" cellpadding="4" align="center">
          <tr>
            <td width="10%">
              <div class="form-group">
              <label for="exampleInputEmail1">Invoice : </label>
+             <input type="hidden" name="id_grs" value="<?= $garansi["ID_GARANSI"]; ?>">
              <input class="form-control" type="text" name="inv" value="<?= $garansi["INV_PENJUALAN"]; ?>" readonly>
              </div>
            </td>
            <td width="45%">
              <div class="form-group">
              <label for="exampleInputEmail1">Nama barang : </label>
-             <input class="form-control" type="text" name="nama_barang" value="<?= $garansi["NAMA_BARANG"]; ?>" readonly>
+             <input type="hidden" name="id_barang" value="<?= $garansi["ID_BARANG"]; ?>">
+             <input class="form-control" type="text" name="" value="<?= $garansi["NAMA_BARANG"]; ?>" readonly>
              </div>
 
            </td>
@@ -77,15 +79,58 @@
                <div class="input-group-prepend">
                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                </div>
-                <input class="form-control datepicker" type="text" name="tgl_habis" value="">
+                <input class="form-control datepicker" type="text" name="tgl_habis" value="<?= $garansi["TGL_HABIS"]; ?>" autocomplete="off" required>
              </div>
            </td>
          </tr>
      </table>
      <button class="btn btn-submit btn-success" id="save" type="submit" name="simpan"><i class="fas fa-upload mr-2"></i>Simpan</button>
    </form>
+   <!-- php untuk kondisi tombol save ditekan -->
+    <?php
+    if (isset($_POST["simpan"])) {
+      if (editgaransi($_POST) > 0) {
+        echo "<script language=\"javascript\">
+        swal({
+              title: \"Berhasil!\",
+              text: \"Garansi berhasil di tambah!\",
+              icon: \"success\",
+              button: \"OK\",
+            }).then((oke) => {
+              document.location.href = 'garansi.php';
+              });;
 
-    <br><br>
+        </script>";
+
+      }
+
+      else {
+        echo mysqli_error($conn);
+      }
+    }
+     ?>
+
+     <?php
+     $data_cust = tampil_data("SELECT * FROM `garansi` INNER JOIN penjualan on garansi.INV_PENJUALAN=penjualan.INV_PENJUALAN INNER JOIN pelanggan ON penjualan.ID_PELANGGAN=pelanggan.ID_PELANGGAN");
+     foreach ($data_cust as $cust) {
+         $customer = $cust["NAMA"];
+         $inv_pj = $cust["INV_PENJUALAN"];
+     }
+     ?>
+     <br><br>
+     <table cellpadding="3">
+       <tr>
+         <td><h6>INVOICE</h6></td>
+         <td><h6>:</h6></td>
+         <td><h6><?=$inv_pj; ?></h6></td>
+       </tr>
+       <tr>
+         <td><h6>Customer</h6></td>
+         <td><h6>:</h6></td>
+         <td><h6><?=$customer; ?></h6></td>
+       </tr>
+     </table>
+    <form class="" action="" method="post">
       <table class="table table-bordered ">
         <thead class="thead-dark text-center">
           <tr>
@@ -94,7 +139,6 @@
             <th scope="col" width="45%">Nama Barang</th>
             <th scope="col" width="14%">Tanggal Beli</th>
             <th scope="col" width="14%">Tanggal Habis</th>
-            <th scope="col" width="104%">Atur Garansi</th>
           </tr>
         </thead>
         <tbody>
@@ -108,14 +152,11 @@
             <td><?=$garansi["NAMA_BARANG"]; ?></td>
             <td align="center"><?=$garansi["TGL_BELI"]; ?></td>
             <td align="center"><?=$garansi["TGL_HABIS"]; ?></td>
-            <td align="center">
-                <a href="garansi-set.php.php?id=<?=$garansi["ID_GARANSI"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
-                <a href="delete.php?id=<?=$garansi["id_inv"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button></a>
-            </td>
           </tr>
         <?php $no++; endforeach; ?>
         </tbody>
       </table>
+      </form>
       <a href="garansi.php"><button class="btn btn-primary btn-submit" type="submit" name=""><i class="fas fa-undo mr-2"></i>Kembali</button></a>
 
 

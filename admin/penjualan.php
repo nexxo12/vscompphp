@@ -267,8 +267,9 @@
           $id_del = $_POST["delete"];//data diterima sesuai yang dikirimkan
           $del_barang = deletepembelian("DELETE FROM list_penjualan WHERE ID_PENJUALAN= '$id_del'");
           $del_barang2 = deletepembelian("DELETE FROM penjualan WHERE ID_PENJUALAN= '$id_del'");
+          $del_grs = deletepembelian("DELETE FROM garansi WHERE ID_GARANSI= '$id_del'");
 
-          if ($del_barang > 0) {
+          if ($del_barang > 0 and $del_grs > 0) {
               echo "
                   <script>
                   document.location.href = '../admin/penjualan.php';

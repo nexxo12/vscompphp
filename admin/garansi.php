@@ -42,50 +42,56 @@
     <div class="tab-pane fade" id="master-customer" role="tabpanel" aria-labelledby="profile-tab"></div> <!-- end master customer -->
     <div class="tab-pane fade show active" id="garansi" role="tabpanel" aria-labelledby="contact-tab">
       <br><br>
+      <?php
+      $tgl_hbs = tampil_data("SELECT TGL_HABIS FROM garansi");
+         foreach ($tgl_hbs as $tgl) {
+           $tgl_habis = $tgl["TGL_HABIS"];
+         }
+
+      $inv = tampil_data("SELECT INV_PENJUALAN FROM garansi WHERE TGL_HABIS = ''");
+      foreach ($inv as $inv_info) {
+        //$inv_count = count($inv_info["INV_PENJUALAN"]);
+        $invoice = $inv_info["INV_PENJUALAN"];
+
+              if (empty($tgl_habis)) {
+                //echo "string" .$inv_count;
+                echo "
+                  <div class=\"alert alert-warning\"><i class=\"fas fa-info-circle mr-1\"></i>
+                  <strong>Info!</strong> Ada garansi yang belum di atur, silahkan cek <b>".$invoice."</b> dan <b>Atur Garansi!!</b>
+                  </div>"
+                  ;
+
+
+               }
+               else {
+                 echo " ";
+
+               }
+
+           }
+
+      ?>
+
       <table class="table table-bordered ">
         <thead class="thead-dark text-center">
           <tr>
             <th scope="col" width="5%">No.</th>
-            <th scope="col" width="20%">Invoice</th>
-            <th scope="col" width="">Customer</th>
-            <th scope="col" width="20%">Tanggal Beli</th>
-            <th scope="col" width="20%">Tanggal Habis</th>
-            <th scope="col" width="">Atur Garansi</th>
+            <th scope="col" width="10%">Invoice</th>
+            <th scope="col" width="45%">Nama Barang</th>
+            <th scope="col" width="14%">Tanggal Beli</th>
+            <th scope="col" width="10%">Atur Garansi</th>
           </tr>
         </thead>
         <tbody>
-          <?php $data_cust = tampil_data("SELECT * FROM `garansi` INNER JOIN penjualan on garansi.INV_PENJUALAN=penjualan.INV_PENJUALAN INNER JOIN pelanggan ON penjualan.ID_PELANGGAN=pelanggan.ID_PELANGGAN")  ?>
-          <?php foreach ($data_cust as $cust) {
-              $customer = $cust["NAMA"];
-              $inv_pj = $cust["INV_PENJUALAN"];
-          }
-          if (!empty($cust["TGL_HABIS"])) {
-
-            $tgl_hbs = tampil_data("SELECT TGL_HABIS FROM garansi WHERE INV_PENJUALAN = '$inv_pj'");
-            foreach ($tgl_hbs as $tgl) {
-              $note = $tgl["TGL_HABIS"];
-            }
-
-           }
-           else {
-             $note = "<p style=\"color:red;\">Garansi Belum di Atur</p>";
-
-           }
-
-          ?>
-
-
           <?php $no=1; $data_grs = tampil_data("SELECT * FROM inv_penjualan")  ?>
           <?php foreach ($data_grs as $garansi) :?>
           <tr>
             <td align="center"><?=$no; ?></td>
             <td align="center"><?=$garansi["id_inv"]; ?></td>
-            <td align="center"><?=$customer; ?></td>
+            <td><?=$garansi["BARANG"]; ?></td>
             <td align="center"><?=$garansi["TGL_TRX"]; ?></td>
-            <td align="center"><?=$note; ?></td>
             <td align="center">
                 <a href="garansi-set.php?id=<?=$garansi["id_inv"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
-                <a href="delete.php?id=<?=$garansi["id_inv"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button></a>
             </td>
           </tr>
         <?php $no++; endforeach; ?>

@@ -27,6 +27,21 @@ function tampil_data($query){
   return $array;
 }
 
+function tampil_data_count($query){
+  //menjadikan @conn variabel global
+  global $conn;
+  //variabel hasil yang menyimpan data dari db
+  $hasil = mysqli_query ($conn,$query);
+  //menyediakan array
+  $array = [];
+  //mengambil semua data di db lalu di looping
+  while($data = mysqli_fetch_array($hasil)){
+    $array[] = $data;
+
+  }
+  return $array;
+}
+
 function autonumber_db($id){
   global $conn;
   $query = "SELECT MAX($id) AS kode FROM master_barang";
@@ -164,6 +179,91 @@ function tambahdata_supp($data){
     return $hasil;
   }
 
+
+  function upload_gambar(){
+    //menganmbil isi array dari $_FILES
+    $namaFile = $_FILES["gambar"]["name"]; //nama file
+    $sizeFile = $_FILES["gambar"]["size"]; //ukuran file
+    $errFile = $_FILES["gambar"]["error"]; //error file, jika yg diupload bukan gambar
+    $tmpFile = $_FILES["gambar"]["tmp_name"]; //tempat penyimpana gambar
+
+    //cek gambar diupload / tidak
+    if ($errFile == 4) {
+      echo "<script language=\"javascript\">
+      swal({
+            title: \"Warning!\",
+            text: \"Gambar wajib diupload..!\",
+            icon: \"warning\",
+            button: \"OK\",
+          });
+
+      </script>";
+      return false;
+    }
+
+    //cek tipe file yang diupload
+    $TYPEektensionFile = ['jpg', 'jpeg', 'bmp', 'png', 'svg', 'gif'];
+    $GETektensionFile = explode('.', $namaFile); // memecah string berupa array (explode) ex: blabla.jpg > 'blabla''jpg'
+    $GETektensionFile = strtolower(end($GETektensionFile)); // (end) mengambil kata yang paling akhir, (strtolower) membuat semua huruf kecil
+    if (!in_array($GETektensionFile, $TYPEektensionFile)) { //in_array untuk mengecek string didalam array
+      echo "<script language=\"javascript\">
+      swal({
+            title: \"Warning!\",
+            text: \"Supported Image (jpg, jpeg, bmp, png, svg, gif)\",
+            icon: \"warning\",
+            button: \"OK\",
+          });
+
+      </script>";
+      return false;
+    }
+
+    //cek ukuran Gambar
+    if ($sizeFile > 2000000) {
+      echo "<script language=\"javascript\">
+      swal({
+            title: \"Warning!\",
+            text: \"Maximum File Upload 2MB..!!\",
+            icon: \"warning\",
+            button: \"OK\",
+          });
+
+      </script>";
+      return false;
+    }
+
+    //generate nama gambar random
+    $namaFileRandom = uniqid();
+    $namaFileRandom .= '.';
+    $namaFileRandom .= $GETektensionFile;
+
+    //lolos pengecekan gambar, lalu upload
+    move_uploaded_file($tmpFile, '../img/news/' .$namaFileRandom);
+    return $namaFileRandom;
+  }
+
+    // lanjutan di function bawah
+
+  function tambahposting($data){
+      global $conn;
+      $judul = htmlspecialchars($data["judul"]);
+      //$gambar = htmlspecialchars($data["gambar"]);
+      $isi = htmlspecialchars($data["isi"]);
+      $tgltime = $data["tanggal-waktu"];
+
+      //upload gambar
+      $gambar = upload_gambar();
+      if (!$gambar) { //jika gagal (trus / false)
+          return false;
+      }
+
+      $query = "INSERT INTO news VALUES ('','$judul','$gambar','$tgltime','$isi') ";
+      $hasil = mysqli_query ($conn,$query);
+      return $hasil;
+    }
+
+
+
   function tambahdata_cust($data){
       global $conn;
       $id_cust = $data["id_cust"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -209,6 +309,15 @@ function deletepembelian($query){
 
 }
 
+function delete($query){
+  //menjadikan @conn variabel global
+  global $conn;
+  //variabel hasil yang menyimpan data dari db
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+}
+
 function deletesupplier($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
   global $conn;
   $hasil = mysqli_query ($conn,"DELETE FROM supplier WHERE ID_SUPP= '$id'");
@@ -243,6 +352,30 @@ function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_
 
 }
 
+function editpost($data){// value $data diterima dari edit-suppier.php berupa $_POST
+  global $conn;
+  $id_news = $data["id_news"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+  $judul = htmlspecialchars($data["judul"]);
+  $gambarOld = $data["old_gambar"];
+  $isi = htmlspecialchars($data["isi"]);
+  $tgltime = $data["tanggal-waktu"];
+
+  //cek user pilih gambar baru / tidak
+  if ($_FILES["gambar"]["error"] == 4) {
+      $gambar = $gambarOld;
+  }
+  else {
+      $gambar = upload_gambar();
+  }
+
+
+  $query = "UPDATE news SET JUDUL = '$judul', GAMBAR = '$gambar', WAKTU = '$tgltime', ISI = '$isi' WHERE ID_NEWS = $id_news";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
 function editcust($data){// value $data diterima dari edit-suppier.php berupa $_POST
   global $conn;
   $id_cust = $data["id_cust"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -255,6 +388,21 @@ function editcust($data){// value $data diterima dari edit-suppier.php berupa $_
 
 
 }
+
+function editgaransi($data){// value $data diterima berupa $_POST
+  global $conn;
+  $id_grs = $data["id_grs"];
+  $inv = $data["inv"];
+  $nama_brg = $data["id_barang"];
+  $tgl_beli = $data["tgl_beli"];
+  $tgl_habis = $data["tgl_habis"];
+  $query = "UPDATE garansi SET TGL_HABIS = '$tgl_habis' WHERE INV_PENJUALAN = '$inv'";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
 
 function caribarang($cari){
 $query = "SELECT * FROM master_barang WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
