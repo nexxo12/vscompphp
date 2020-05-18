@@ -53,7 +53,7 @@
         //$inv_count = count($inv_info["INV_PENJUALAN"]);
         $invoice = $inv_info["INV_PENJUALAN"];
 
-              if (empty($tgl_habis)) {
+              if ($tgl_habis == "0000-00-00") {
                 //echo "string" .$inv_count;
                 echo "
                   <div class=\"alert alert-warning\"><i class=\"fas fa-info-circle mr-1\"></i>
@@ -72,7 +72,7 @@
 
       ?>
 
-      <table class="table table-bordered ">
+      <table class="table table-bordered " id="tabel-data">
         <thead class="thead-dark text-center">
           <tr>
             <th scope="col" width="5%">No.</th>
@@ -111,5 +111,10 @@
 
 <br><br><br><br><br>
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#tabel-data').DataTable();
+});
+</script>
 </body>
 </html>

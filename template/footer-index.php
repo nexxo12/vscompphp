@@ -4,35 +4,37 @@
       <div class="col-md-5 text-white mr-5">
           <table class="footer-table" border="0" cellpadding="7" width="100%">
             <tr>
-              <td><img class="content-footer" src="../img/msi.png" alt="MSI"></img></td>
-              <td><img class="content-footer" src="../img/gigabyte.png" alt="Power Supply"></img></td>
-              <td><img class="content-footer" src="../img/intel.png" alt="Power Supply"></img></td>
-              <td><img class="content-footer" src="../img/thermaltahke.png" alt="thermaltahke"></img></td>
-              <td><img class="content-footer" src="../img/klevv.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/msi.png" alt="MSI"></img></td>
+              <td><img class="content-footer" src="img/gigabyte.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/intel.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/thermaltahke.png" alt="thermaltahke"></img></td>
+              <td><img class="content-footer" src="img/klevv.png" alt="Power Supply"></img></td>
             </tr>
             <tr>
-              <td><img class="content-footer" src="../img/amd.png" alt="MSI"></img></td>
-              <td><img class="content-footer" src="../img/asrock.png" alt="Power Supply"></img></td>
-              <td><img class="content-footer" src="../img/colorful.png" alt="Power Supply"></img></td>
-              <td><img class="content-footer" src="../img/galax_logo.png" alt="thermaltahke"></img></td>
-              <td><img class="content-footer" src="../img/gskill.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/amd.png" alt="MSI"></img></td>
+              <td><img class="content-footer" src="img/asrock.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/colorful.png" alt="Power Supply"></img></td>
+              <td><img class="content-footer" src="img/galax_logo.png" alt="thermaltahke"></img></td>
+              <td><img class="content-footer" src="img/gskill.png" alt="Power Supply"></img></td>
             </tr>
           </table>
       </div>
-      <div class="space-footer">
+
+      <div class="col-md-2">
 
       </div>
+
       <div class="col-md-2 text-white mt-5 pl-5">
           <div class="footer-item-position">
           <h5 class="ml-5">Support</h5>
           <div class="dropdown-divider ml-5"></div>
-          <ul class="list-unstyled ml-5">
-               <li><a href="../support/faq.php" class="footer-link">FAQ</a></li>
-               <li><a href="../support/contact.php" class="footer-link">Contact</a></li>
-               <li><a href="../support/warranty.php" class="footer-link">Warranty</a></li>
-               <li><a href="../admin/login.php" class="footer-link">Login</a></li>
+		      <ul class="list-unstyled ml-5">
+			         <li><a href="support/faq.php" class="footer-link">FAQ</a></li>
+               <li><a href="support/contact.php" class="footer-link">Contact</a></li>
+               <li><a href="support/warranty.php" class="footer-link">Warranty</a></li>
+               <li><a href="admin/login.php" class="footer-link">Login</a></li>
 
-        </ul>
+		    </ul>
         </div>
       </div>
       <div class="col-md-2 text-white mt-5 pl-5">
@@ -84,12 +86,9 @@ function scrollFunction() {
 }
 </script>
 
-<script>
-   $(document).ready(function(){
-       $('#tabel-data').DataTable();
-   });
+<script type="text/javascript">
+  AOS.init({once: true,});
 </script>
-
 
 </body>
 </html>

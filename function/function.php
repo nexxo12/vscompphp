@@ -410,8 +410,22 @@ return tampil_data($query);
 
 }
 
+function caribarangModal($cari){
+$query = "SELECT * FROM master_barang WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
+$hasil = mysqli_query ($conn,$query);
+$data = mysqli_fetch_assoc($hasil);
+return $data;
+
+}
+
 function carisupp($cari){
 $query = "SELECT * FROM supplier WHERE ID_SUPP LIKE '%$cari%' OR NAMA LIKE '%$cari%'";
+return tampil_data($query);
+
+}
+
+function carigaransi($cari){
+$query = "SELECT * FROM garansi WHERE INV_PENJUALAN ='$cari'";
 return tampil_data($query);
 
 }

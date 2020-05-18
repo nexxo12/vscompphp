@@ -74,8 +74,8 @@
         <td width="1%">:</td>
 
         <?php
-            if (isset($_POST["add"])) {//periksa jika add mengirimkan data
-                $id_add = $_POST["add"];//data diterima sesuai yang dikirimkan
+            if (isset($_GET["add"])) {//periksa jika add mengirimkan data
+                $id_add = $_GET["add"];//data diterima sesuai yang dikirimkan
                 $d_barang = tampil_data("SELECT NAMA_BARANG FROM master_barang WHERE ID_BARANG = '$id_add'");
 
             }
@@ -88,7 +88,7 @@
           <div class="input-group mt-1">
           <input class="form-control" width="1px" type="text" name="id_barang" value="<?= $id_add; ?>" readonly>
           <div class="input-group-prepend">
-            <button class="btn btn-primary launch-modal" type="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-search"></i></button>
+            <button class="btn btn-primary launch-modal" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></button>
           </div>
           </div>
         </td>
@@ -122,8 +122,8 @@
     <tr>
       <td width="40%">
         <?php
-        if (isset($_POST["add"])) {//periksa jika add mengirimkan data
-            $id_add = $_POST["add"];//data diterima sesuai yang dikirimkan
+        if (isset($_GET["add"])) {//periksa jika add mengirimkan data
+            $id_add = $_GET["add"];//data diterima sesuai yang dikirimkan
             $d_barang = tampil_data("SELECT NAMA_BARANG FROM master_barang WHERE ID_BARANG = '$id_add'");
               foreach ($d_barang as $add_barang) {
                 $n_barang = $add_barang["NAMA_BARANG"];
@@ -143,8 +143,8 @@
       </td>
 
       <?php
-      if (isset($_POST["add"])) {//periksa jika add mengirimkan data
-            $id_add = $_POST["add"];
+      if (isset($_GET["add"])) {//periksa jika add mengirimkan data
+            $id_add = $_GET["add"];
             $harga_aw = tampil_data("SELECT HARGA_BELI FROM pembelian_barang WHERE ID_BARANG='$id_add'");
             foreach ($harga_aw as $awal) {
               $awal_harga = $awal["HARGA_BELI"];
@@ -171,8 +171,8 @@
 
         <?php
 
-        if (isset($_POST["add"])) {//periksa jika add mengirimkan data
-              $id_add = $_POST["add"];
+        if (isset($_GET["add"])) {//periksa jika add mengirimkan data
+              $id_add = $_GET["add"];
               $harga_jl = tampil_data("SELECT HARGA_JUAL FROM master_barang WHERE ID_BARANG='$id_add'");
               foreach ($harga_jl as $jual) {
                 $jl_harga = $jual["HARGA_JUAL"];
@@ -330,24 +330,21 @@
   </form>
 <!-- end checkout -->
 
-  <!-- modal barang -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-backdrop="static">
+  <!-- The Modal Barang-->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
       <div class="modal-content">
+
+        <!-- Modal Header -->
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Daftar Barang</h5>
-
-          <form class="form-inline" style="margin-left:46%;" action="" method="post">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" autofocus autocomplete='off'>
-            <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
-          </form>
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title">Daftar Barang</h5>
+            <input class="form-control mr-sm-2" style="width:30%; margin-left:46%;" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" autofocus autocomplete='off'>
+            <button class="btn btn-primary" type="submit" value="1" name="cari"><i class="fas fa-search"></i></button>
         </div>
+
+        <!-- Modal body -->
         <div class="modal-body">
-          <form class="" action="" method="post">
+
           <table class="table table-bordered ">
             <thead class="thead-dark text-center">
               <tr>
@@ -357,29 +354,25 @@
               </tr>
             </thead>
 
-            <?php $data_barang = tampil_data("SELECT * FROM master_barang"); ?>
-            <?php foreach ($data_barang as $barang) : ?>
-            <tbody>
+            <tbody id="isi-barang">
               <tr>
-                <td><?= $barang["ID_BARANG"]; ?></td>
-                <td><?= $barang["NAMA_BARANG"]; ?></td>
-                <td>
-                    <button class="btn btn-primary" type="submit" name="add" value="<?= $barang["ID_BARANG"]; ?>"><i class="fas fa-plus"></i></button>
-                </td>
+
               </tr>
             </tbody>
-          <?php endforeach; ?>
           </table>
-          </div>
 
-          </form>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
+
         </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
-        </div>
-        <!-- end modal -->
+
+      </div>
+    </div>
+  </div>
+
 
         <!-- Modal Print -->
         <div class="modal fade" id="ModalPrint">
@@ -426,15 +419,7 @@
 </div> <!-- end container -->
 
 <br><br><br><br><br>
-<script type="text/javascript">
-$(document).ready(function(){
-	$('.launch-modal').click(function(){
-		$('#exampleModalCenter').modal({
-			backdrop: 'static'
-		});
-	});
-});
-</script>
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -442,8 +427,8 @@ $(document).ready(function(){
       e.preventDefault();
       $.ajax({ //menjalankan ajax
           type:$(this).attr('method'), //menentukan post / get, (this) = form
-          url:$(this).attr('action'), //url untuk action pada form
-          data:$(this).serialize(), //data untuk mengambil dan input dari form inputan
+          url:$(this).attr('action'), //url tujuan pengiriman data
+          data:$(this).serialize(), //data yang akan dikirimkan
           success:function(){ //jika sukses
             swal("Berhasil!", "Data berhasil disimpan!", "success").then((oke) => {
               $('#ModalPrint').modal('show')
@@ -460,9 +445,18 @@ $(document).ready(function(){
 function redirect(){
   document.location.href = 'penjualan.php';
 }
-
-
 </script>
+
+<!-- script pencarian -->
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#keyword').on('keyup', function(){
+      $('#isi-barang').load('detail-barang.php?keyword=' + $('#keyword').val())
+    })
+});
+</script>
+
+
 
 </body>
 </html>

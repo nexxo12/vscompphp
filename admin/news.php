@@ -142,7 +142,6 @@
 
 
         <br>
-
         <table class="table table-bordered ">
           <thead class="thead-dark text-center">
             <tr>

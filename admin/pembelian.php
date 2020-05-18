@@ -169,23 +169,17 @@
 
     <!-- modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document" data-backdrop="static">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalCenterTitle">Daftar Barang</h5>
-
-            <form class="form-inline" style="margin-left:46%;" action="" method="post">
-              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" autofocus autocomplete='off'>
-              <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
-            </form>
-
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form class="" action="" method="post">
-            <table class="table table-bordered ">
+            <table class="table table-bordered " id="tabel-data">
               <thead class="thead-dark text-center">
                 <tr>
                   <th scope="col" width="13%">Kode</th>
@@ -220,7 +214,7 @@
 
     <br><br>
 
-    <table class="table table-bordered ">
+    <table class="table table-bordered">
       <thead class="thead-dark text-center">
         <tr>
           <th scope="col" width="9%">No Faktur</th>
@@ -298,6 +292,12 @@
 </div> <!-- end container -->
 
 <br><br><br><br><br>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#tabel-data').DataTable();
+});
+</script>
 
 </body>
 </html>

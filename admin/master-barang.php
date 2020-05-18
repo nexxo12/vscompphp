@@ -155,7 +155,7 @@
 
 
     <form class="form-inline" style="float:right" action="" method="post">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" autofocus>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" autofocus>
       <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
     </form><br><br>
 
@@ -198,7 +198,7 @@
 
         foreach ($data_barang as $barang) :?>
 
-        <tbody>
+        <tbody id="isi-barang">
           <tr>
             <td align="center"><?= $no ?></td>
             <td><?= $barang["ID_BARANG"]; ?></td>
@@ -272,5 +272,6 @@
 
 <br><br><br><br><br>
 
+</script>
 </body>
 </html>
