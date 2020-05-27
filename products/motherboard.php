@@ -33,7 +33,7 @@
             $mobo_jumlah = "<p style=\"color:red;\">Habis</p>";
         }
         elseif ($mobo["STOK"] < 5) {
-            $mobo_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+            $mobo_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
         }
         else {
             $mobo_jumlah = "<p style=\"color:green;\">Ready</p>";

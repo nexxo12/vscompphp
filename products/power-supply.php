@@ -34,7 +34,7 @@
               $psu_jumlah = "<p style=\"color:red;\">Habis</p>";
           }
           elseif ($psu["STOK"] < 5) {
-              $psu_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+              $psu_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
           }
           else {
               $psu_jumlah = "<p style=\"color:green;\">Ready</p>";

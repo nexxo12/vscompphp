@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="css/stylesimulasi.css">
 <link rel="stylesheet" href="fontawesome/css/all.min.css">
 <link rel="stylesheet" href="css/datatables.min.css">
-<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
@@ -15,7 +15,7 @@
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top primary-nav" id="nav">
     <div class="container">
-    <a class="navbar-brand" href="../index.php">
+    <a class="navbar-brand" href="index.php">
     <img src="img/LOGO+TEXT.png" alt="Logo" id="logo"></img>
     </a>
    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

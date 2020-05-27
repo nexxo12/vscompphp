@@ -35,7 +35,7 @@
               $proc_jumlah = "<p style=\"color:red;\">Habis</p>";
           }
           elseif ($proc["STOK"] < 5) {
-              $proc_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+              $proc_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
           }
           else {
               $proc_jumlah = "<p style=\"color:green;\">Ready</p>";

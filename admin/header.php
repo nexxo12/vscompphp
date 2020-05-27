@@ -17,6 +17,7 @@
   <script src="../js/sweetalert.min.js"></script>
   <script src="../js/datatables.min.js"></script>
   <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../ckeditor/ckeditor.js"></script>
 </head>
 <body>
 

@@ -92,7 +92,7 @@
               <label for="exampleInputEmail1" style="margin-bottom:228px;">Isi : </label>
             </td>
             <td>
-              <textarea name="isi" rows="10" cols="132"></textarea>
+              <textarea id="texteditor" name="isi" rows="10" cols="132"></textarea>
             </td>
           </tr>
       </table>
@@ -184,5 +184,8 @@
 
 <br><br><br><br><br>
 
+<script>
+  CKEDITOR.replace( 'texteditor' );
+</script>
 </body>
 </html>

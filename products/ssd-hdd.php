@@ -34,7 +34,7 @@
             $hddssd_jumlah = "<p style=\"color:red;\">Habis</p>";
         }
         elseif ($mobo["STOK"] < 5) {
-            $hddssd_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+            $hddssd_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
         }
         else {
             $hddssd_jumlah = "<p style=\"color:green;\">Ready</p>";

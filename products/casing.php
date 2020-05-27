@@ -33,7 +33,7 @@
             $case_jumlah = "<p style=\"color:red;\">Habis</p>";
         }
         elseif ($case["STOK"] < 5) {
-            $case_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+            $case_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
         }
         else {
             $case_jumlah = "<p style=\"color:green;\">Ready</p>";

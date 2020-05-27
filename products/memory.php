@@ -33,7 +33,7 @@
             $ram_jumlah = "<p style=\"color:red;\">Habis</p>";
         }
         elseif ($ram["STOK"] < 5) {
-            $ram_jumlah = "<p style=\"color:yellow;\">Hampir Habis</p>";
+            $ram_jumlah = "<p style=\"color:orange;\">Hampir Habis</p>";
         }
         else {
             $ram_jumlah = "<p style=\"color:green;\">Ready</p>";

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="css/styleproduct.css">
 <link rel="stylesheet" href="fontawesome/css/all.min.css">
 <link rel="stylesheet" href="css/datatables.min.css">
-<script src="js/jquery-3.4.1.slim.min.js"></script>
+<script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="fontawesome/js/all.min.js"></script>
