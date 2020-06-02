@@ -27,10 +27,10 @@
       <a class="nav-link" id="profile-tab" href="garansi.php" role="tab" aria-controls="garansi" aria-selected="false"><i class="fas fa-history mr-2"></i>Garansi</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" id="profile-tab" href="news.php" role="tab" aria-controls="news" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>News</a>
+      <a class="nav-link" id="profile-tab" href="news.php" role="tab" aria-controls="news" aria-selected="false"><i class="fas fa-newspaper mr-2"></i>News</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" href="promo.php" role="tab" aria-controls="promo" aria-selected="false"><i class="fas fa-percentage mr-2"></i>Promo</a>
+      <a class="nav-link active" id="profile-tab" href="promo.php" role="tab" aria-controls="promo" aria-selected="false"><i class="fas fa-percentage mr-2"></i>Promo</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
@@ -44,13 +44,27 @@
     <div class="tab-pane fade" id="master-customer" role="tabpanel" aria-labelledby="profile-tab">master customer</div>
     <div class="tab-pane fade" id="garansi" role="tabpanel" aria-labelledby="contact-tab">Garansi</div>
 
-    <div class="tab-pane fade show active" id="news" role="tabpanel" aria-labelledby="contact-tab">
-      <br>
-      <?php
-        $id = $_GET["id"];//data id diterima dari master-barang.php
-        $data_news = tampil_data("SELECT * FROM news WHERE ID_NEWS = '$id'")[0];
-       ?>
+    <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="contact-tab"></div> <!-- end news -->
+    <div class="tab-pane fade show active" id="promo" role="tabpanel" aria-labelledby="contact-tab">
+
       <div class="form-input">
+          <form class="" action="" method="POST">
+          <table>
+            <tr>
+              <td><button class="btn btn-success" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Buat Promo</button></a></td>
+            </tr>
+        </table>
+        </form>
+        <br>
+
+
+        <!-- php untuk input jumlah data -->
+        <?php
+            if(isset($_POST["tambah"])){
+              //$jumlah di looping
+
+
+        ?>
         <form class="" action="" method="post" enctype="multipart/form-data">
         <div class="table-news">
           <br>
@@ -61,8 +75,7 @@
               <label for="exampleInputEmail1">Judul : </label>
             </td>
             <td>
-              <input type="hidden" name="id_news" value="<?=$data_news["ID_NEWS"]; ?>">
-              <input class="form-control" type="text" name="judul" value="<?=$data_news["JUDUL"]; ?>">
+              <input class="form-control" type="text" name="judul" value="">
             </td>
           </tr>
           <tr>
@@ -73,19 +86,14 @@
               <?php $tgl=date('Y-m-d H:i:s'); ?>
               <input type="hidden" name="tanggal-waktu" value="<?=$tgl; ?>">
               <input class="" type="file" name="gambar" value="">
-              <input type="hidden" name="old_gambar" value="<?=$data_news["GAMBAR"]; ?>">
             </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><img src="../img/news/<?=$data_news["GAMBAR"]; ?>" alt="" style="height:100px; width:200px;"></td>
           </tr>
           <tr>
             <td>
               <label for="exampleInputEmail1" style="margin-bottom:228px;">Isi : </label>
             </td>
             <td>
-              <textarea id="texteditor" name="isi" rows="10" cols="132"><?=$data_news["ISI"]; ?></textarea>
+              <textarea id="texteditor" name="isi" rows="10" cols="132"></textarea>
             </td>
           </tr>
       </table>
@@ -93,6 +101,10 @@
       <button class="btn btn-submit btn-success" id="save" type="submit" name="save"><i class="fas fa-save mr-2"></i>Save</button><br><br>
       </div>
       </form>
+        <!--php penutup if  -->
+        <?php
+            }
+         ?>
 
          <!-- php untuk tombol save -->
          <?php
@@ -100,17 +112,15 @@
              if(isset($_POST["save"])){
                 //var_dump($_POST);
                 //var_dump($_FILES);
-                if (editpost($_POST) > 0) {
+                if (tambahpromo($_POST) > 0) {
 
                     echo "<script language=\"javascript\">
                     swal({
                           title: \"Berhasil!\",
-                          text: \"Sukses mengubah data!\",
+                          text: \"Sukses membuat posting!\",
                           icon: \"success\",
                           button: \"OK\",
-                        }).then((oke) => {
-                          document.location.href = 'news.php';
-                          });;;
+                        });
 
                     </script>";
 
@@ -133,11 +143,39 @@
 
 
         <br>
+        <table class="table table-bordered ">
+          <thead class="thead-dark text-center">
+            <tr>
+              <th scope="col" width="1%">No.</th>
+              <th scope="col" width="">Judul</th>
+              <th scope="col" width="16%">Gambar</th>
+              <th scope="col" width="14%">Waktu</th>
+              <th scope="col" width="10%">Atur</th>
+            </tr>
+          </thead>
+          <?php
+            $no=1;
+            $data_promo = tampil_data("SELECT * FROM promo");
+            ?>
+            <?php foreach ($data_promo as $promo) : ?>
+            <tbody>
+              <tr>
+                <td align="center"><?= $no ?></td>
+                <td><?= $promo["JUDUL"]; ?></td>
+                <td align="center"><img src="../img/promo/<?=$promo["GAMBAR"]; ?>" alt="" style="height:50px; width:100px;"></td>
+                <td align="center"><?= $promo["WAKTU"]; ?></td>
+                <td>
+                    <a href="edit-promo.php?id=<?=$promo["ID_PROMO"]; ?>" ><button class="btn btn-warning" type="button" name="edit"><i class="fas fa-edit"></i></button>
+                    <a href="del-promo.php?id=<?=$promo["ID_PROMO"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><button class="btn btn-danger" type="button" name="delete"><i class="fas fa-trash"></i></button></a>
+                </td>
+              </tr>
+            </tbody>
+          <?php endforeach; ?>
+        </table>
 
     </div>
 
-    </div> <!-- end news -->
-    <div class="tab-pane fade" id="promo" role="tabpanel" aria-labelledby="contact-tab">promo</div>
+    </div>
 
   </div> <!-- end tab-content -->
 
@@ -149,6 +187,5 @@
 <script>
   CKEDITOR.replace( 'texteditor' );
 </script>
-
 </body>
 </html>

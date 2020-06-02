@@ -12,9 +12,29 @@
       <tr>
         <td><?= $tampil["ID_BARANG"]; ?></td>
         <td><?= $tampil["NAMA_BARANG"]; ?></td>
-        <td><a href="penjualan.php?add=<?= $tampil["ID_BARANG"]; ?>"><button class="btn btn-primary" type="submit" id="add"><i class="fas fa-plus"></i></button></a></td>
+        <td align="center"><?= $tampil["STOK"]; ?></td>
+        <?php
+          if ($tampil["STOK"]==0) {
+        ?>
+          <td><button class="btn btn-primary" type="button" id="add" value="" disabled><i class="fas fa-plus"></i></button></a></td>
+        <?php
+          }
+          elseif ($tampil["STOK"]!=0) {
+         ?>
+          <td><a href="penjualan.php?add=<?= $tampil["ID_BARANG"]; ?>"><button class="btn btn-primary" type="submit" id="add" value=""><i class="fas fa-plus"></i></button></a></td>
+         <?php
+          }
+         ?>
+
+
+
+
       </tr>
 
 
 
 <?php endforeach;  ?>
+<script type="text/javascript">
+
+
+</script>

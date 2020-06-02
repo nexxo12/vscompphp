@@ -45,7 +45,7 @@
       <h5 class="card-header">Penjualan</h5>
     <div class="card-body">
       <a href="history-penjualan.php"><p style="position:absolute; left:85%; top:1.5%;">History penjualan &raquo</p></a>
-    <form class="" action="" method="post">
+    <form class="" action="simpan-cart.php" method="post">
     <table class="table-group" id="form" cellpadding="3" align="center" width="80%" border="0">
       <tr>
         <?php $autonumber_db = autonumber_inv("id_inv"); ?>
@@ -55,7 +55,7 @@
         <td>
 
           <div class="form-group">
-                <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db++;  ?>" readonly>
+                <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db;  ?>" readonly>
                 <input type="hidden" name="id_pjforinv" value="<?=$autonumber_pj ?>">
           </div>
         </td>
@@ -159,7 +159,7 @@
       <td><div class="form-group">
       <label for="exampleInputEmail1"><b>Harga Awal :</b></label>
       <input type="hidden" name="harga_awal" value="<?=$awal_harga;  ?>">
-      <input class="form-control" type="text" name="" placeholder="" value="Rp. <?=$awal_harga2;  ?>" readonly>
+      <input class="form-control" type="text" name="harga_awal2" placeholder="" value="Rp. <?=$awal_harga2;  ?>" readonly>
       </div>
       </td>
       <td width="10%"><div class="form-group">
@@ -188,48 +188,16 @@
          ?>
 
       <div class="form-group">
-      <label for="exampleInputEmail1"><b>Harga Jual</b></label>
+      <label for="exampleInputEmail1"><b>Harga Jual :</b></label>
       <input type="hidden" name="harga_jual" value="<?=$jl_harga; ?>">
-      <input class="form-control" type="text"  placeholder="" value="Rp. <?=$jl_harga2; ?>">
+      <input class="form-control" type="text" name="harga_jual2"  placeholder="" value="Rp. <?=$jl_harga2; ?>">
       </div>
       </td>
 
     </tr>
   </table>
   <button class="btn btn-submit btn-success mt-2" id="save" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button><br><br><br>
-
-  <?php
-  if (isset($_POST["tambah"])) {
-      global $conn;
-      //var_dump($_POST);
-      //operasi matematika
-      $jumlah = $_POST["jumlah"];
-      $harga = $_POST["harga_jual"];
-      $harga_total = $jumlah * $harga;//end
-
-      //mengambil data dari inputan
-      $id_list = $_POST["id_pjforinv"];
-      $inv = $_POST["id_pj"];
-      $cust = $_POST["customer"];
-      $id_barang = $_POST["id_barang"];
-      $idlogin = $_POST["kasir"];
-      $tgl = $_POST["tgl"];
-      $h_awal = $_POST["harga_awal"];
-      $jumlah = $_POST["jumlah"];
-      $h_jual = $_POST["harga_jual"];
-      $query = "INSERT INTO list_penjualan VALUES ('$id_list','$inv','$id_barang','$cust','$idlogin','$tgl','$jumlah','$h_awal','$h_jual','$harga_total') ";
-      $hasil = mysqli_query ($conn,$query);
-      if ($hasil > 0) {
-        echo "";
-      }
-      else {
-        echo mysqli_error($conn);
-      }
-
-
-
-  }
-  ?>
+  </form>
 
 
   <table class="table" align="center" border="0">
@@ -243,87 +211,34 @@
         <th scope="col" width="5%"></th>
       </tr>
     </thead>
-    <tbody>
-      <?php
-      $no=1;
-      $tampil_pj = tampil_data("SELECT * FROM list_penjualan INNER JOIN master_barang ON list_penjualan.ID_BARANG=master_barang.ID_BARANG");?>
-      <?php foreach ($tampil_pj as $list_pj) :
-        $barang = $list_pj["NAMA_BARANG"];
-      ?>
-      <tr>
-        <td><?=$no; ?></td>
-        <td><?=$list_pj["NAMA_BARANG"]; ?></td>
-        <td><?=number_format($list_pj["HARGA_JUAL"]); ?></td>
-        <td align="center"><?=$list_pj["JUMLAH_BELI"]; ?></td>
-        <td><?=number_format($list_pj["TOTAL_HARGA"]); ?></td>
-        <td><button class="btn btn-danger" type="submit" name="delete" value="<?=$list_pj["ID_PENJUALAN"]; ?>"><i class="fas fa-trash"></i></button></td>
-      </tr>
-    <?php
-      $no++;
-      endforeach; ?>
+    <tbody id="content_cart">
 
-      <?php
-      if (isset($_POST["delete"])) {//periksa jika add mengirimkan data
-          $id_del = $_POST["delete"];//data diterima sesuai yang dikirimkan
-          $del_barang = deletepembelian("DELETE FROM list_penjualan WHERE ID_PENJUALAN= '$id_del'");
-          $del_barang2 = deletepembelian("DELETE FROM penjualan WHERE ID_PENJUALAN= '$id_del'");
-          $del_grs = deletepembelian("DELETE FROM garansi WHERE ID_GARANSI= '$id_del'");
-
-          if ($del_barang > 0 and $del_grs > 0) {
-              echo "
-                  <script>
-                  document.location.href = '../admin/penjualan.php';
-                  </script>
-              ";
-
-          }
-
-          elseif ($del_barang2 > 0) {
-            echo "
-                <script>
-                document.location.href = '../admin/penjualan.php';
-                </script>
-            ";
-          }
-
-          else {
-            echo mysqli_error($conn);
-          }
-
-
-        }
-
-      ?>
-      <!-- fungsi penjumlahan total harga -->
-      <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM list_penjualan");?>
-      <?php foreach ($sum_total as $jumlah) {
-            $total_harga = number_format($jumlah["jumlah"]);
-            $total_harga2 = $jumlah["jumlah"];
-      } ?>
-
-      <!-- fungsi penjumlahan jumlah -->
-      <?php $sum_total = tampil_data("SELECT SUM(JUMLAH_BELI) AS jumlah_beli FROM list_penjualan");?>
-      <?php foreach ($sum_total as $jumlah) {
-            $jumlah_beli = number_format($jumlah["jumlah_beli"]);
-      } ?>
-
-
-      <tr>
-        <td colspan="3"><h5 style="margin-left:80%; margin-top:1%;">GRAND TOTAL : </h5><hr></td>
-        <td align="center"><h5 style="margin-top:15%;"><?=$jumlah_beli; ?></h5><hr></td>
-        <td><h5 class="mt-2"><?=$total_harga; ?></h5><hr></td>
-      </tr>
     </tbody>
+
+    <!-- fungsi penjumlahan total harga -->
+    <?php $sum_total = tampil_data("SELECT SUM(TOTAL_HARGA) AS jumlah FROM list_penjualan");?>
+    <?php foreach ($sum_total as $jumlaht) {
+          $total_harga = number_format($jumlaht["jumlah"]);
+          $total_harga2 = $jumlaht["jumlah"];
+    } ?>
+
+    <tfoot>
+    <tr>
+      <td colspan="3"><h5 style="margin-left:80%; margin-top:1%;">GRAND TOTAL : </h5><hr></td>
+      <td align="center"><h5 style="margin-top:15%;" id="jumlah_total"></h5><hr></td>
+      <td><h5 class="mt-2" id="total_harga"></h5><hr></td>
+    </tr>
+    </tfoot>
   </table>
-</form>
+
 
 <!-- Checkout ajax jquery -->
 <form class="checkout" action="checkout.php" method="post">
   <?php $autonumber_db = autonumber_inv("id_inv"); ?>
   <input type="hidden" name="id_pj" value="<?= $autonumber_db; ?>">
   <input type="hidden" name="tgl" value="<?=$tgl; ?>">
-  <input type="hidden" name="total" value="<?=$total_harga2; ?>">
-  <input type="hidden" name="nama_barang" value="<?= $barang; ?>">
+  <input type="hidden" name="total" id="totalInputINV">
+  <input type="hidden" name="nama_barang" id="namabarangINV">
   <button class="btn btn-submit btn-success mt-2"  type="submit" name="simpan"><i class="fas fa-shopping-cart mr-2"></i>Checkout</button><br><br>
   </div>
   </div>
@@ -350,6 +265,7 @@
               <tr>
                 <th scope="col" width="13%">Kode</th>
                 <th scope="col" width="">Nama Barang</th>
+                <th scope="col" width="5%">Stok</th>
                 <th scope="col" width="10%">Aksi</th>
               </tr>
             </thead>
@@ -420,7 +336,7 @@
 
 <br><br><br><br><br>
 
-
+<!-- script checkout brg -->
 <script type="text/javascript">
   $(document).ready(function(){
     $('.checkout').on('submit',function(e){//disable loading saat tekan tombol pada form class checkout
@@ -441,13 +357,93 @@
 
 </script>
 
+<!-- script add cart -->
 <script type="text/javascript">
-function redirect(){
-  document.location.href = 'penjualan.php';
+$(document).ready(function(){
+  loadData();
+  JumlahTotal();
+  TotalHarga();
+  TotalInputHarga();
+  ShowNamaBarangINV();
+  $('form').on('submit', function(e){//disable loading saat tekan tombol
+    e.preventDefault();
+    $.ajax({ //menjalankan ajax dg jquery
+        type:$(this).attr('method'), //menentukan post / get, (this) = form
+        url:$(this).attr('action'), //url untuk action pada form
+        data:$(this).serialize(), //data untuk mengambil dan input dari form inputan
+        success:function(){ //jika sukses
+          loadData();
+          JumlahTotal();
+          TotalHarga();
+          TotalInputHarga();
+          ShowNamaBarangINV();
+          resetinput();
+        }
+
+    })
+  })
+})
+
+function loadData(){
+  $.get('data-cart.php', function(data_cart){
+    $('#content_cart').html(data_cart);
+    $('.hapus').click(function(e){
+      e.preventDefault();
+      $.ajax({ //menjalankan ajax dg jquery
+          type:'GET', //menentukan post / get, (this) = form
+          url:$(this).attr('href'), //url untuk action pada link
+          success:function(){ //jika sukses
+           loadData();
+           JumlahTotal();
+           TotalHarga();
+           TotalInputHarga();
+           ShowNamaBarangINV();
+
+
+          }
+
+      })
+    })
+  })
+}
+function JumlahTotal(){
+  $.get('ajax_jumlah.php', function(data_jumlah){
+      $('#jumlah_total').html(data_jumlah);
+  })
+
+}
+
+function TotalHarga(){
+  $.get('ajax_grandTotal.php', function(data_total){
+      $('#total_harga').html(data_total);
+  })
+
+}
+
+function TotalInputHarga(){
+  $.get('ajax_grandTotalINV.php', function(data_total){
+      $('#totalInputINV').val(data_total);
+  })
+
+}
+
+function ShowNamaBarangINV(){
+  $.get('ajax_namabarangINV.php', function(data_total){
+      $('#namabarangINV').val(data_total);
+  })
+
+}
+
+function resetinput(){
+  $('[name=nama_barang]').val('');
+  $('[name=harga_awal2]').val('');
+  $('[name=jumlah]').val('');
+  $('[name=harga_jual2]').val('');
+  $('[name=id_barang]').val('');
 }
 </script>
 
-<!-- script pencarian -->
+<!-- script pencarian brg modal -->
 <script type="text/javascript">
 $(document).ready(function(){
     $('#keyword').on('keyup', function(){
@@ -456,7 +452,13 @@ $(document).ready(function(){
 });
 </script>
 
+<!-- redirect untuk tombol close print -->
+<script type="text/javascript">
+function redirect(){
+  document.location.href = 'penjualan.php';
+}
 
+</script>
 
 </body>
 </html>

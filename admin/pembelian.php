@@ -42,7 +42,7 @@
       <div class="card">
         <h5 class="card-header">Pembelian</h5>
       <div class="card-body">
-
+        <a href="history-pembelian.php"><p style="position:absolute; left:85%; top:1.5%;">History pembelian &raquo</p></a>
         <?php
           if (isset($_POST["simpan"])) {
             //var_dump($_POST);
@@ -85,8 +85,8 @@
           <td>
             <div class="input-group mb-1">
                 <?php
-                    if (isset($_POST["add"])) {//periksa jika add mengirimkan data
-                        $id_add = $_POST["add"];//data diterima sesuai yang dikirimkan
+                    if (isset($_GET["add"])) {//periksa jika add mengirimkan data
+                        $id_add = $_GET["add"];//data diterima sesuai yang dikirimkan
                         $d_barang = tampil_data("SELECT NAMA_BARANG FROM master_barang WHERE ID_BARANG = '$id_add'");
                         foreach ($d_barang as $add_barang) {
                           $n_barang = $add_barang["NAMA_BARANG"];
@@ -94,14 +94,14 @@
 
                     }
                     else {
-                       $n_barang = "Masukan Nama Barang";//jika tdk ada tampilkan string
+                       $n_barang = "Cari Nama Barang";//jika tdk ada tampilkan string
                     }
                ?>
                 <input type="hidden" name="id_login" value="1">
                 <input type="hidden" name="id_barang" value="<?= $id_add; ?>">
-                <input type="text" class="form-control" placeholder="" value="<?= $n_barang; ?>" autofocus required>
+                <input type="text" class="form-control" placeholder="" value="<?= $n_barang; ?>" autofocus required readonly>
                 <div class="input-group-prepend">
-                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></button>
                 </div>
             </div>
           </td>
@@ -167,19 +167,22 @@
     </form>
 
 
-    <!-- modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <!-- The Modal Barang-->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content">
+
+          <!-- Modal Header -->
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Daftar Barang</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <h5 class="modal-title">Daftar Barang</h5>
+              <input class="form-control mr-sm-2" style="width:30%; margin-left:46%;" type="search" placeholder="Search" aria-label="Search" name="keyword" id="keyword" autofocus autocomplete='off'>
+              <button class="btn btn-primary" type="submit" value="1" name="cari"><i class="fas fa-search"></i></button>
           </div>
+
+          <!-- Modal body -->
           <div class="modal-body">
-            <form class="" action="" method="post">
-            <table class="table table-bordered " id="tabel-data">
+
+            <table class="table table-bordered ">
               <thead class="thead-dark text-center">
                 <tr>
                   <th scope="col" width="13%">Kode</th>
@@ -188,91 +191,24 @@
                 </tr>
               </thead>
 
-              <?php $data_barang = tampil_data("SELECT * FROM master_barang"); ?>
-              <?php foreach ($data_barang as $barang) : ?>
-              <tbody>
+              <tbody id="isi-barang">
                 <tr>
-                  <td><?= $barang["ID_BARANG"]; ?></td>
-                  <td><?= $barang["NAMA_BARANG"]; ?></td>
-                  <td>
-                      <button class="btn btn-primary" type="submit" name="add" value="<?= $barang["ID_BARANG"]; ?>"><i class="fas fa-plus"></i></button>
-                  </td>
+
                 </tr>
               </tbody>
-            <?php endforeach; ?>
             </table>
-            </div>
 
-            </form>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+
           </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
-          </div>
-          <!-- end modal -->
 
-    <br><br>
-
-    <table class="table table-bordered">
-      <thead class="thead-dark text-center">
-        <tr>
-          <th scope="col" width="9%">No Faktur</th>
-          <th scope="col" width="35%">Nama Barang</th>
-          <th scope="col" width="5%">QTY</th>
-          <th scope="col" width="6%">Satuan</th>
-          <th scope="col" width="13%">Harga</th>
-          <th scope="col" width="13%">Supplier</th>
-          <th scope="col" width="9%">Tanggal</th>
-          <th scope="col" width="5%">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php $data_beli = tampil_data("SELECT *  FROM pembelian_barang INNER JOIN master_barang ON
-                           pembelian_barang.ID_BARANG=master_barang.ID_BARANG INNER JOIN supplier ON supplier.ID_SUPP=pembelian_barang.ID_SUPP ORDER BY ID_BELI"); ?>
-        <?php foreach ($data_beli as $beli) :?>
-        <tr>
-          <td align="center"><?=$beli["ID_BELI"]; ?></td>
-          <td><?=$beli["NAMA_BARANG"]; ?></td>
-          <td align="center"><?=$beli["JUMLAH"]; ?></td>
-          <td align="center"><?=$beli["SATUAN"]; ?></td>
-          <td>Rp. <?=number_format($beli["HARGA_BELI"]); ?></td>
-          <td><?=$beli["NAMA"]; ?></td>
-          <td><?=$beli["TGL_BELI"]; ?></td>
-          <form class="" action="" method="get">
-          <td><button class="btn btn-danger" type="submit" name="delete" value="<?=$beli["ID_BELI"]; ?>" onclick="return confirm('Apakah anda yakin ?');"><i class="fas fa-trash"></i></button></a></td>
-          </form>
-        </tr>
-      <?php
-      if (isset($_GET["delete"])) {//periksa jika add mengirimkan data
-          $id_del = $_GET["delete"];//data diterima sesuai yang dikirimkan
-          $del_barang = deletepembelian("DELETE FROM pembelian_barang WHERE ID_BELI= '$id_del'");
-
-          if ($del_barang > 0) {
-              echo "
-                  <script>
-                  alert('Data Berhasil Dihapus!!');
-                  document.location.href = '../admin/pembelian.php';
-                  </script>
-              ";
-
-          }
-
-          else {
-            echo "
-                <script>
-                alert('Data Gagal Dihapus!!');
-                </script>
-            ";
-            echo mysqli_error($conn);
-          }
-
-
-        }
-      ?>
-      <?php endforeach; ?>
-      </tbody>
-    </table>
+        </div>
+      </div>
+    </div>
 
     </div>
     <!-- end pembelian -->
@@ -292,6 +228,14 @@
 </div> <!-- end container -->
 
 <br><br><br><br><br>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#keyword').on('keyup', function(){
+      $('#isi-barang').load('detail-barangPemb.php?keyword=' + $('#keyword').val())
+    })
+});
+</script>
 
 <script type="text/javascript">
 $(document).ready(function(){

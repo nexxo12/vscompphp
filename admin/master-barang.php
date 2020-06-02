@@ -168,7 +168,7 @@
           <th scope="col" width="">Kategori</th>
           <th scope="col" width="4%">Jumlah</th>
           <th scope="col" width="5%">Satuan</th>
-          <th scope="col" width="14%">Harga</th>
+          <th scope="col" width="14%">Harga Jual</th>
           <th scope="col" width="10%">Aksi</th>
         </tr>
       </thead>

@@ -262,6 +262,88 @@ function tambahdata_supp($data){
       return $hasil;
     }
 
+    function upload_gambar_promo(){
+      //menganmbil isi array dari $_FILES
+      $namaFile = $_FILES["gambar"]["name"]; //nama file
+      $sizeFile = $_FILES["gambar"]["size"]; //ukuran file
+      $errFile = $_FILES["gambar"]["error"]; //error file, jika yg diupload bukan gambar
+      $tmpFile = $_FILES["gambar"]["tmp_name"]; //tempat penyimpana gambar
+
+      //cek gambar diupload / tidak
+      if ($errFile == 4) {
+        echo "<script language=\"javascript\">
+        swal({
+              title: \"Warning!\",
+              text: \"Gambar wajib diupload..!\",
+              icon: \"warning\",
+              button: \"OK\",
+            });
+
+        </script>";
+        return false;
+      }
+
+      //cek tipe file yang diupload
+      $TYPEektensionFile = ['jpg', 'jpeg', 'bmp', 'png', 'svg', 'gif'];
+      $GETektensionFile = explode('.', $namaFile); // memecah string berupa array (explode) ex: blabla.jpg > 'blabla''jpg'
+      $GETektensionFile = strtolower(end($GETektensionFile)); // (end) mengambil kata yang paling akhir, (strtolower) membuat semua huruf kecil
+      if (!in_array($GETektensionFile, $TYPEektensionFile)) { //in_array untuk mengecek string didalam array
+        echo "<script language=\"javascript\">
+        swal({
+              title: \"Warning!\",
+              text: \"Supported Image (jpg, jpeg, bmp, png, svg, gif)\",
+              icon: \"warning\",
+              button: \"OK\",
+            });
+
+        </script>";
+        return false;
+      }
+
+      //cek ukuran Gambar
+      if ($sizeFile > 2000000) {
+        echo "<script language=\"javascript\">
+        swal({
+              title: \"Warning!\",
+              text: \"Maximum File Upload 2MB..!!\",
+              icon: \"warning\",
+              button: \"OK\",
+            });
+
+        </script>";
+        return false;
+      }
+
+      //generate nama gambar random
+      $namaFileRandom = uniqid();
+      $namaFileRandom .= '.';
+      $namaFileRandom .= $GETektensionFile;
+
+      //lolos pengecekan gambar, lalu upload
+      move_uploaded_file($tmpFile, '../img/promo/' .$namaFileRandom);
+      return $namaFileRandom;
+    }
+
+      // lanjutan di function bawah
+
+    function tambahpromo($data){
+        global $conn;
+        $judul = htmlspecialchars($data["judul"]);
+        //$gambar = htmlspecialchars($data["gambar"]);
+        $isi = htmlspecialchars($data["isi"]);
+        $tgltime = $data["tanggal-waktu"];
+
+        //upload gambar
+        $gambar = upload_gambar_promo();
+        if (!$gambar) { //jika gagal (trus / false)
+            return false;
+        }
+
+        $query = "INSERT INTO promo VALUES ('','$judul','$gambar','$tgltime','$isi') ";
+        $hasil = mysqli_query ($conn,$query);
+        return $hasil;
+      }
+
 
 
   function tambahdata_cust($data){
@@ -376,6 +458,30 @@ function editpost($data){// value $data diterima dari edit-suppier.php berupa $_
 
 }
 
+function editpromo($data){// value $data diterima dari edit-suppier.php berupa $_POST
+  global $conn;
+  $id_promo = $data["id_promo"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+  $judul = htmlspecialchars($data["judul"]);
+  $gambarOld = $data["old_gambar"];
+  $isi = htmlspecialchars($data["isi"]);
+  $tgltime = $data["tanggal-waktu"];
+
+  //cek user pilih gambar baru / tidak
+  if ($_FILES["gambar"]["error"] == 4) {
+      $gambar = $gambarOld;
+  }
+  else {
+      $gambar = upload_gambar_promo();
+  }
+
+
+  $query = "UPDATE promo SET JUDUL = '$judul', GAMBAR = '$gambar', WAKTU = '$tgltime', ISI = '$isi' WHERE ID_PROMO = $id_promo";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
 function editcust($data){// value $data diterima dari edit-suppier.php berupa $_POST
   global $conn;
   $id_cust = $data["id_cust"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -405,7 +511,7 @@ function editgaransi($data){// value $data diterima berupa $_POST
 
 
 function caribarang($cari){
-$query = "SELECT * FROM master_barang WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
+$query = "SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
 return tampil_data($query);
 
 }
