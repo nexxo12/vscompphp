@@ -1,3 +1,14 @@
+<?php
+include'../function/function.php';
+session_start();
+//cek sudah login?
+$user = $_SESSION['username'];
+if (!isset($_SESSION['username'])) {
+    header("location: ../support/login.php");
+}
+$hasil = mysqli_query($conn, "SELECT *  FROM login WHERE USERNAME = '$user'");
+$row = mysqli_fetch_assoc($hasil);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +20,7 @@
   <link rel="stylesheet" href="../css/datatables.min.css">
   <link rel="stylesheet" href="../css/datepicker.css">
   <link rel="stylesheet" href="../fontawesome/css/all.min.css">
-  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/admin.css?v=1.0">
   <script src="../js/jquery-3.5.1.min.js"></script>
   <script src="../js/popper.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
@@ -34,11 +45,12 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i>
+          <?php echo $row["NAMA"]; ?> <i class="fas fa-user"></i>
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Setting</a>
-          <a class="dropdown-item" href="#">Log Out</a>
+          <a class="dropdown-item" href="setting.php">Setting</a>
+          <a class="dropdown-item" href="tambah-akun.php">Tambah Akun</a>
+          <a class="dropdown-item" href="logout.php">Log Out</a>
 
         </div>
         <li class="nav-item">

@@ -1,5 +1,5 @@
 <?php include'header.php';
-      include'../function/function.php';
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -97,7 +97,7 @@
                        $n_barang = "Cari Nama Barang";//jika tdk ada tampilkan string
                     }
                ?>
-                <input type="hidden" name="id_login" value="1">
+                <input type="hidden" name="id_login" value="<?=$row["ID_LOGIN"]; ?>">
                 <input type="hidden" name="id_barang" value="<?= $id_add; ?>">
                 <input type="text" class="form-control" placeholder="" value="<?= $n_barang; ?>" autofocus required readonly>
                 <div class="input-group-prepend">

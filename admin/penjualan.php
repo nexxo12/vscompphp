@@ -1,6 +1,5 @@
 <?php include'header.php';
-      include'../function/function.php';
-      session_start();
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -97,7 +96,8 @@
         <td>:</td>
         <td>
           <div class="form-group">
-          <input class="form-control mt-2" type="text" name="kasir" placeholder="" value="1" readonly>
+          <input class="form-control mt-2" type="hidden" name="kasir" placeholder="" value="<?=$row["ID_LOGIN"]; ?>" readonly>
+          <input class="form-control mt-2" type="text" name="nama_kasir" value="<?=$row["NAMA"]; ?>" readonly>
           </div>
         </td>
       </tr>

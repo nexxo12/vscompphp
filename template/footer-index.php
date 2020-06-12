@@ -32,7 +32,7 @@
 			         <li><a href="support/faq.php" class="footer-link">FAQ</a></li>
                <li><a href="support/contact.php" class="footer-link">Contact</a></li>
                <li><a href="support/warranty.php" class="footer-link">Warranty</a></li>
-               <li><a href="admin/login.php" class="footer-link">Login</a></li>
+               <li><a href="support/login.php" class="footer-link">Login</a></li>
 
 		    </ul>
         </div>

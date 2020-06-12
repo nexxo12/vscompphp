@@ -1,5 +1,6 @@
-<?php include'header.php';
-      include'../function/function.php';
+<?php
+include'header.php';
+    
 ?>
 
 <div class="container-fluid custom-container">

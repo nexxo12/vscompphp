@@ -49,6 +49,14 @@ a.dropdown-item{
   width: 65%;
 }
 
+.custom-setprofile{
+  width: 30%;
+}
+
+.pass-input{
+  width: 10%;
+}
+
 
 @media only screen and (max-width: 600px) {
 

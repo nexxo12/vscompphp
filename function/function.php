@@ -125,6 +125,17 @@ function autonumber_pj($id){
   return $kode;
 }
 
+function autonumber_user($id){
+  global $conn;
+  $query = "SELECT MAX($id) AS kode FROM login";
+  $hasil = mysqli_query ($conn,$query);
+  $data = mysqli_fetch_array($hasil);
+  $kode = $data["kode"]; //mengambil data 'kode'
+  $kode++;
+
+  return $kode;
+}
+
 function autonumber_cust($id){
   global $conn;
   $query = "SELECT MAX($id) AS kode FROM pelanggan";
@@ -357,6 +368,19 @@ function tambahdata_supp($data){
       return $hasil;
     }
 
+function tambahdata_user($data){
+        global $conn;
+        $id = $data["id_login"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+        $nama = $data["nama"];
+        $alamat = $data["alamat"];
+        $username = $data["username"];
+        $password = md5($data["password"]);
+        $level = $data["level"];
+        $query = "INSERT INTO login VALUES ('$id','$username','$password','$nama','$alamat','$level') ";
+        $hasil = mysqli_query ($conn,$query);
+        return $hasil;
+      }
+
 function tambahdata_beli($data){
       global $conn;
       $id_beli = $data["id_beli"];
@@ -428,6 +452,21 @@ function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_
   $alamat = $data["alamat"];
   $hp = $data["hp"];
   $query = "UPDATE supplier SET NAMA = '$nama_supp', ALAMAT = '$alamat', NO_HP = '$hp' WHERE ID_SUPP = $id_supp";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
+function editprofile($data){// value $data diterima dari edit-suppier.php berupa $_POST
+  global $conn;
+  $id = $data["id_login"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
+  $nama = $data["nama"];
+  $alamat = $data["alamat"];
+  $username = $data["username"];
+  $password = md5($data["password"]);
+  $level = $data["level"];
+  $query = "UPDATE login SET NAMA = '$nama', ALAMAT = '$alamat', USERNAME = '$username', PASSWORD= '$password', LEVEL = '$level' WHERE ID_LOGIN = $id";
   $hasil = mysqli_query ($conn,$query);
   return $hasil;
 

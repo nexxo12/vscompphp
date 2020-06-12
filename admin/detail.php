@@ -1,6 +1,5 @@
 <?php include'header.php';
-      include'../function/function.php';
-      session_start();
+      
 ?>
 
 <div class="container-fluid custom-container">

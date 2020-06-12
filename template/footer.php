@@ -30,7 +30,7 @@
                <li><a href="../support/faq.php" class="footer-link">FAQ</a></li>
                <li><a href="../support/contact.php" class="footer-link">Contact</a></li>
                <li><a href="../support/warranty.php" class="footer-link">Warranty</a></li>
-               <li><a href="../admin/login.php" class="footer-link">Login</a></li>
+               <li><a href="../support/login.php" class="footer-link">Login</a></li>
 
         </ul>
         </div>
@@ -88,6 +88,57 @@ function scrollFunction() {
    $(document).ready(function(){
        $('#tabel-data').DataTable();
    });
+</script>
+
+<!-- ajax mengambil data provinsi -->
+<script type="text/javascript">
+$(document).ready(function(){
+  $.ajax({
+    type : 'POST',
+    url : 'ongkir_api/provinsi.php',
+    success: function(data_provinsi){
+      $("select[name=provinsi]").html(data_provinsi);
+    }
+  });
+
+  $("select[name=provinsi]").on("change",function(){
+    var idProvPilih = $("option:selected",this).attr("id_prov")
+    $.ajax({
+      type : 'POST',
+      url : 'ongkir_api/kota-kab.php',
+      data: 'idProvinsi='+idProvPilih,
+      success: function(data_kotaKab){
+        $("select[name=kotakab]").html(data_kotaKab);
+      }
+    });
+  });
+
+  $.ajax({
+    type : 'POST',
+    url : 'ongkir_api/kurir.php',
+    success: function(data_kurir){
+      $("select[name=ekpedisi]").html(data_kurir);
+    }
+  });
+
+  $("select[name=ekpedisi]").on("change",function(){
+    var kurir = $(this).val();
+    var tujuan = $("option:selected","select[name=kotakab]").val();
+    var berat = $("#berat").val();
+    $.ajax({
+      type : 'POST',
+      url : 'ongkir_api/ekpedisi.php',
+      data: 'idkurir='+kurir+'&idtujuan='+tujuan+'&berat='+berat,
+      success: function(data_ongkir){
+        $("#result-ekpedisi").html(data_ongkir);
+
+      }
+    });
+
+  })
+
+})
+
 </script>
 
 
