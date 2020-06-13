@@ -1,8 +1,8 @@
 <?php
 
-// $tujuan = $_POST["idtujuan"];
-// $kurir = $_POST["idkurir"];
-// $berat = $_POST["berat"];
+$tujuan = $_POST["idtujuan"];
+$kurir = $_POST["idkurir"];
+$berat = $_POST["berat"];
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
@@ -13,8 +13,8 @@ curl_setopt_array($curl, array(
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  //CURLOPT_POSTFIELDS => "origin=444&destination=".$tujuan."&weight=".$berat."&courier=".$kurir,
-  CURLOPT_POSTFIELDS => "origin=444&destination=114&weight=1700&courier=jne",
+  CURLOPT_POSTFIELDS => "origin=444&destination=".$tujuan."&weight=".$berat."&courier=".$kurir,
+  //CURLOPT_POSTFIELDS => "origin=444&destination=114&weight=1700&courier=jne",
   CURLOPT_HTTPHEADER => array(
     "content-type: application/x-www-form-urlencoded",
     "key: 95be7567e2b243b07bdbc8fd9eb763ae"

@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -156,7 +156,7 @@
             $no=1;
             $data_news = tampil_data("SELECT * FROM news");
             ?>
-            <?php foreach ($data_news as $news) : ?>
+            <?php $no=1; foreach ($data_news as $news) : ?>
             <tbody>
               <tr>
                 <td align="center"><?= $no ?></td>
@@ -169,7 +169,7 @@
                 </td>
               </tr>
             </tbody>
-          <?php endforeach; ?>
+          <?php $no++; endforeach; ?>
         </table>
 
     </div>

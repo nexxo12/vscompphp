@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -63,7 +63,7 @@
             <td align="center"><?=$inv["TGL_TRX"]; ?></td>
             <td align="center">
               <a href="detail.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-success" type="submit" name="detail" value=""><i class="fas fa-list"></i></button></a>
-              <a href="print.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
+              <a href="print-view.php?inv=<?=$inv["id_inv"]; ?>" target="_blank"><button class="btn btn-info" type="submit" name="print" value=""><i class="fas fa-print"></i></button></a>
               <a href="delete-h.php?id=<?=$inv["id_inv"]; ?>"><button class="btn btn-danger" type="submit" name="delete" value="" onclick="return confirm('Apakah anda yakin ?');"><i class="fas fa-trash"></i></button></a>
             </td>
           </tr>

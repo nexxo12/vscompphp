@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -34,18 +34,36 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">tampilan dasboard</div>
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <br>
+
+    <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+
+    <div class="card mb-3" style="max-width: 18rem;">
+    <div class="card-header bg-primary text-white">Header</div>
+    <div class="card-body">
+      <h5 class="card-title">Primary card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    </div>
+
+    </div> <!-- end home -->
     <div class="tab-pane fade" id="pembelian" role="tabpanel" aria-labelledby="profile-tab">pembelian</div>
     <div class="tab-pane fade" id="penjualan" role="tabpanel" aria-labelledby="contact-tab">penjualan</div>
-
     <!-- tab master barang -->
-    <div class="tab-pane fade" id="master-barang" role="tabpanel" aria-labelledby="profile-tab">
-    </div> <!-- end master barang -->
-
+    <div class="tab-pane fade" id="master-barang" role="tabpanel" aria-labelledby="profile-tab"></div> <!-- end master barang -->
     <!-- master supplier start -->
-    <div class="tab-pane fade" id="master-supplier" role="tabpanel" aria-labelledby="contact-tab">
-    </div> <!-- end master supplier -->
-
+    <div class="tab-pane fade" id="master-supplier" role="tabpanel" aria-labelledby="contact-tab"></div> <!-- end master supplier -->
     <div class="tab-pane fade" id="master-customer" role="tabpanel" aria-labelledby="profile-tab">master customer</div>
     <div class="tab-pane fade" id="garansi" role="tabpanel" aria-labelledby="contact-tab">Garansi</div>
     <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="contact-tab">news</div>

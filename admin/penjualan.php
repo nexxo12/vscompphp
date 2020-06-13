@@ -164,7 +164,7 @@
       </td>
       <td width="10%"><div class="form-group">
       <label for="exampleInputEmail1"><b>Jumlah:</b></label>
-      <input class="form-control" type="text" name="jumlah" placeholder="" autocomplete="off">
+      <input class="form-control" type="text" name="jumlah" placeholder="" autocomplete="off" required>
       </div>
       </td>
       <td>

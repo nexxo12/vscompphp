@@ -99,8 +99,8 @@
       <?php $data_news = tampil_data("SELECT * FROM news");?>
        <?php foreach ($data_news as $news) : ?>
       <tr>
-        <td><?=$news["WAKTU"]; ?></td>
-        <td><a class="news" href="news.php?view=<?=$news["ID_NEWS"]; ?>"><?=$news["JUDUL"]; ?></a></td>
+        <td width="20%"><?=$news["WAKTU"]; ?></td>
+        <td><a class="news" href="read/news.php?view=<?=$news["ID_NEWS"]; ?>" target="_blank"><?=$news["JUDUL"]; ?></a></td>
       </tr>
     <?php endforeach; ?>
     </tbody>
@@ -132,30 +132,13 @@
      </tr>
    </thead>
    <tbody>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
-      <tr>
-        <td>31-03-2020</td>
-        <td>Three Months Extension for Warranty </td>
-      </tr>
+     <?php $data_promo = tampil_data("SELECT * FROM promo");?>
+      <?php foreach ($data_promo as $promo) : ?>
+     <tr>
+       <td width="20%"><?=$promo["WAKTU"]; ?></td>
+       <td><a class="news" href="read/promo.php?view=<?=$promo["ID_PROMO"]; ?>" target="_blank"><?=$promo["JUDUL"]; ?></a></td>
+     </tr>
+   <?php endforeach; ?>
     </tbody>
   </table>
   </div>

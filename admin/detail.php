@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -68,7 +68,7 @@
         <tr>
           <td><h5>Kasir</h5></td>
           <td><h5>:</h5></td>
-          <td><h5><?=$inv["ID_LOGIN"]; ?></h5></td>
+          <td><h5><?=$row["NAMA"]; ?></h5></td>
         </tr>
       </table>
       <br>

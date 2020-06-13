@@ -53,8 +53,8 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline" action="#">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <form class="form-inline" action="pencarian.php" method="get">
+      <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search" required>
       <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>

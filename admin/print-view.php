@@ -21,34 +21,34 @@
   <?php foreach ($data_pj as $inv) :?>
   <?php endforeach; ?>
 
-  <table width="100%" border="0">
-    <tr>
-      <td rowspan="3" width="12%"><img src="../img/LogoWEBV2.png" alt="" style="height:130px; width:130px;"></td>
-      <td width="35%">
-        <h3>VSComputer</h3>
-        <i class="fas fa-map-marker-alt mr-2"></i>Bendul merisi permai Blok D no. D9 - Surabaya
-      </td>
-      <td></td>
-      <td><h5>INVOICE : <?=$inv["INV_PENJUALAN"]; ?></h5><strong><?=$inv["NAMA"]; ?></strong></td>
-    </tr>
-    <tr>
-      <td><i class="fas fa-envelope-square mr-2"></i>ravinorahman@gmail.com</td>
-      <td></td>
-      <td>Alamat : <?=$inv["ALAMAT"]; ?></td>
-    </tr>
-    <tr>
-      <td><i class="fab fa-whatsapp mr-2"></i>08385-352-5037</td>
-      <td></td>
-      <td>Hp : <?=$inv["HP"]; ?></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td width="30%"></td>
-      <td>Tanggal : <?=$inv["TANGGAL_TRANSAKSI"]; ?></td>
-    </tr>
+<table width="100%" border="0">
+  <tr>
+    <td rowspan="3" width="12%"><img src="../img/LogoWEBV2.png" alt="" style="height:130px; width:130px;"></td>
+    <td width="35%">
+      <h3>VSComputer</h3>
+      <i class="fas fa-map-marker-alt mr-2"></i>Bendul merisi permai Blok D no. D9 - Surabaya
+    </td>
+    <td></td>
+    <td><h5>INVOICE : <?=$inv["INV_PENJUALAN"]; ?></h5><strong><?=$inv["NAMA"]; ?></strong></td>
+  </tr>
+  <tr>
+    <td><i class="fas fa-envelope-square mr-2"></i>ravinorahman@gmail.com</td>
+    <td></td>
+    <td>Alamat : <?=$inv["ALAMAT"]; ?></td>
+  </tr>
+  <tr>
+    <td><i class="fab fa-whatsapp mr-2"></i>08385-352-5037</td>
+    <td></td>
+    <td>Hp : <?=$inv["HP"]; ?></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td width="30%"></td>
+    <td>Tanggal : <?=$inv["TANGGAL_TRANSAKSI"]; ?></td>
+  </tr>
 
-  </table>
+</table>
 <br>
 <table class="table table-border" align="center">
   <thead>
@@ -93,10 +93,12 @@
     </tfoot>
 </table>
 
+<button type="button" style="margin-left: 45%;" class="btn btn-primary" onclick="window.print();">Cetak</button>
+
 </div>
 
 <script type="text/javascript">
-window.print();
+//window.print();
 </script>
 </body>
 </html>

@@ -141,6 +141,10 @@ $(document).ready(function(){
 
 </script>
 
+<script>
+  CKEDITOR.replace( 'texteditor' );
+</script>
+
 
 </body>
 </html>
