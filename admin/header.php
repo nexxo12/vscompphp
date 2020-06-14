@@ -28,6 +28,8 @@ $row = mysqli_fetch_assoc($hasil);
   <script src="../js/sweetalert.min.js"></script>
   <script src="../js/datatables.min.js"></script>
   <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../js/Chart.bundle.min.js"></script>
+  <script src="../js/count.js"></script>
   <script src="../ckeditor/ckeditor.js"></script>
 </head>
 <body>

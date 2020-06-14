@@ -45,6 +45,24 @@ a.dropdown-item{
   margin-left: 45%;
 }
 
+.pembelian{
+  position: absolute;
+  left: 75%;
+  bottom: 10%;
+  font-size: 70px;
+  color: grey;
+  z-index: 0;
+  opacity: 0.4;
+}
+.card-body-custom{
+  background-image: url(../img/dasboard-img.jpg);
+  background-size: 100%;
+}
+
+.chart-category{
+  width: 100%;
+}
+
 .custom-container{
   width: 65%;
 }
