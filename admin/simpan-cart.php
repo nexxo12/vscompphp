@@ -1,7 +1,7 @@
 <?php
 include'../function/function.php';
 
-if(isset($_POST["id_pj"])){
+if(isset($_POST["id_pjforinv"])){
    //var_dump($_POST);
    $jumlah = $_POST["jumlah"];
    $harga = $_POST["harga_jual"];
@@ -26,4 +26,5 @@ if(isset($_POST["id_pj"])){
      echo mysqli_error($conn);
    }
  }
+
  ?>

@@ -89,7 +89,7 @@
           <tr>
             <td align="center"><?=$no; ?></td>
             <td><?=$inv["NAMA_BARANG"]; ?></td>
-            <td align="center">Rp. <?=number_format($inv["HARGA_JUAL"]); ?></td>
+            <td align="center">Rp. <?=number_format($inv["HARGA_JUALPJ"]); ?></td>
             <td align="center"><?=$inv["JUMLAH_BELI"]; ?></td>
             <td align="center">Rp. <?=number_format($inv["TOTAL_HARGA"]); ?></td>
           </tr>

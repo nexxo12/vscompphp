@@ -44,18 +44,18 @@
       <h5 class="card-header">Penjualan</h5>
     <div class="card-body">
       <a href="history-penjualan.php"><p style="position:absolute; left:85%; top:1.5%;">History penjualan &raquo</p></a>
-    <form class="" action="simpan-cart.php" method="post">
+    <form class="penjualan" action="" method="post">
     <table class="table-group" id="form" cellpadding="3" align="center" width="80%" border="0">
       <tr>
         <?php $autonumber_db = autonumber_inv("id_inv"); ?>
-        <?php $autonumber_pj = autonumber_pj("ID_PENJUALAN"); ?>
+
         <td width=""><label for="exampleInputEmail1">No. Faktur</label></td>
         <td width="1%">:</td>
         <td>
 
           <div class="form-group">
                 <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db;  ?>" readonly>
-                <input type="hidden" name="id_pjforinv" value="<?=$autonumber_pj ?>">
+                <input type="hidden" name="id_pjforinv" value="">
           </div>
         </td>
         <td width="30%"></td>
@@ -72,22 +72,11 @@
         <td width=""><label for="exampleInputEmail1">Barang</label></td>
         <td width="1%">:</td>
 
-        <?php
-            if (isset($_GET["add"])) {//periksa jika add mengirimkan data
-                $id_add = $_GET["add"];//data diterima sesuai yang dikirimkan
-                $d_barang = tampil_data("SELECT NAMA_BARANG FROM master_barang WHERE ID_BARANG = '$id_add'");
-
-            }
-            else {
-               $id_add = "Kode Barang";//jika tdk ada tampilkan string
-            }
-       ?>
-
         <td width="">
           <div class="input-group mt-1">
-          <input class="form-control" width="1px" type="text" name="id_barang" value="<?= $id_add; ?>" readonly>
+          <input class="form-control" width="1px" type="text" name="id_barang" id="id_barang" value="Kode Barang" readonly>
           <div class="input-group-prepend">
-            <button class="btn btn-primary launch-modal" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></button>
+            <button class="btn btn-primary launch-modal" type="button" data-toggle="modal" data-target="#myModal" onclick="refresh()"><i class="fas fa-search"></i></button>
           </div>
           </div>
         </td>
@@ -121,45 +110,16 @@
   <table align="center" border="0" width="70%">
     <tr>
       <td width="40%">
-        <?php
-        if (isset($_GET["add"])) {//periksa jika add mengirimkan data
-            $id_add = $_GET["add"];//data diterima sesuai yang dikirimkan
-            $d_barang = tampil_data("SELECT NAMA_BARANG FROM master_barang WHERE ID_BARANG = '$id_add'");
-              foreach ($d_barang as $add_barang) {
-                $n_barang = $add_barang["NAMA_BARANG"];
-              }
-
-        }
-        else {
-           $n_barang = " ";//jika tdk ada tampilkan string
-        }
-
-
-        ?>
         <div class="form-group">
           <label for="exampleInputEmail1"><b>Nama barang :</b></label>
-          <input class="form-control" name="nama_barang" type="text" placeholder="" value="<?=$n_barang ?>">
+          <input class="form-control" name="nama_barang" type="text" placeholder="" value="">
         </div>
       </td>
 
-      <?php
-      if (isset($_GET["add"])) {//periksa jika add mengirimkan data
-            $id_add = $_GET["add"];
-            $harga_aw = tampil_data("SELECT HARGA_BELI FROM pembelian_barang WHERE ID_BARANG='$id_add'");
-            foreach ($harga_aw as $awal) {
-              $awal_harga = $awal["HARGA_BELI"];
-              $awal_harga2 = number_format($awal["HARGA_BELI"]);
-            }
-        }
-        else {
-              $awal_harga = " ";
-              $awal_harga2 = " ";
-        }
-       ?>
       <td><div class="form-group">
       <label for="exampleInputEmail1"><b>Harga Awal :</b></label>
-      <input type="hidden" name="harga_awal" value="<?=$awal_harga;  ?>">
-      <input class="form-control" type="text" name="harga_awal2" placeholder="" value="Rp. <?=$awal_harga2;  ?>" readonly>
+      <input type="hidden" name="harga_awal" value="">
+      <input class="form-control" type="text" name="harga_awal2" placeholder="" value="" readonly>
       </div>
       </td>
       <td width="10%"><div class="form-group">
@@ -169,28 +129,9 @@
       </td>
       <td>
 
-        <?php
-
-        if (isset($_GET["add"])) {//periksa jika add mengirimkan data
-              $id_add = $_GET["add"];
-              $harga_jl = tampil_data("SELECT HARGA_JUAL FROM master_barang WHERE ID_BARANG='$id_add'");
-              foreach ($harga_jl as $jual) {
-                $jl_harga = $jual["HARGA_JUAL"];
-                $jl_harga2 = number_format($jual["HARGA_JUAL"]);
-              }
-          }
-          else {
-                $jl_harga = " ";
-                $jl_harga2= " ";
-          }
-
-
-         ?>
-
       <div class="form-group">
       <label for="exampleInputEmail1"><b>Harga Jual :</b></label>
-      <input type="hidden" name="harga_jual" value="<?=$jl_harga; ?>">
-      <input class="form-control" type="text" name="harga_jual2"  placeholder="" value="Rp. <?=$jl_harga2; ?>">
+      <input class="form-control" type="text" name="harga_jual"  placeholder="" value="">
       </div>
       </td>
 
@@ -365,12 +306,13 @@ $(document).ready(function(){
   TotalHarga();
   TotalInputHarga();
   ShowNamaBarangINV();
-  $('form').on('submit', function(e){//disable loading saat tekan tombol
+  $('button[name=tambah]').click(function(e){//disable loading saat tekan tombol
     e.preventDefault();
+    var data = $('.penjualan').serialize();
     $.ajax({ //menjalankan ajax dg jquery
-        type:$(this).attr('method'), //menentukan post / get, (this) = form
-        url:$(this).attr('action'), //url untuk action pada form
-        data:$(this).serialize(), //data untuk mengambil dan input dari form inputan
+        type: 'POST', //menentukan post / get, (this) = form
+        url: 'simpan-cart.php', //url untuk action pada form
+        data: data, //data untuk mengambil dan input dari form inputan
         success:function(){ //jika sukses
           loadData();
           JumlahTotal();
@@ -406,6 +348,13 @@ function loadData(){
     })
   })
 }
+
+function refresh(){
+  $.get('detail-barang.php', function(data_brg){
+    $('#isi-barang').html(data_brg);
+  })
+}
+
 function JumlahTotal(){
   $.get('ajax_jumlah.php', function(data_jumlah){
       $('#jumlah_total').html(data_jumlah);
@@ -437,8 +386,10 @@ function ShowNamaBarangINV(){
 function resetinput(){
   $('[name=nama_barang]').val('');
   $('[name=harga_awal2]').val('');
+  $('[name=harga_awal]').val('');
   $('[name=jumlah]').val('');
   $('[name=harga_jual2]').val('');
+  $('[name=harga_jual]').val('');
   $('[name=id_barang]').val('');
 }
 </script>
