@@ -43,7 +43,7 @@
     <div class="card">
       <h5 class="card-header">History Penjualan</h5>
     <div class="card-body">
-      <table class="table table-bordered ">
+      <table class="table table-bordered " id="tabel-data">
         <thead class="thead-dark ">
           <tr>
             <th scope="col" width="12%" class="text-center">Invoice</th>
@@ -93,5 +93,10 @@
 
 <br><br><br><br><br>
 
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#tabel-data').DataTable();
+});
+</script>
 </body>
 </html>

@@ -101,7 +101,7 @@
                 <input type="hidden" name="id_barang" value="<?= $id_add; ?>">
                 <input type="text" class="form-control" placeholder="" value="<?= $n_barang; ?>" autofocus required readonly>
                 <div class="input-group-prepend">
-                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal"><i class="fas fa-search"></i></button>
+                  <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#myModal" onclick="refresh()"><i class="fas fa-search"></i></button>
                 </div>
             </div>
           </td>
@@ -234,7 +234,18 @@ $(document).ready(function(){
     $('#keyword').on('keyup', function(){
       $('#isi-barang').load('detail-barangPemb.php?keyword=' + $('#keyword').val())
     })
+
+
 });
+</script>
+
+<script>
+function refresh(){
+  $.get('detail-barangPemb.php', function(data_brg){
+    $('#isi-barang').html(data_brg);
+  })
+}
+
 </script>
 
 <script type="text/javascript">

@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -47,11 +47,15 @@
             <tr>
               <td><input class="form-control" type="text" placeholder="Jumlah Data" name="jumlah" required></td>
               <td><button class="btn btn-success" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button></a></td>
+
             </tr>
         </table>
-        </form>
-        <br>
+      </form>
+      <div style="position: absolute; left:36%; top:17.8%;">
+        <a href="paket-pc.php"><button class="btn btn-success" type="submit" name="paket_pc"><i class="fas fa-cog mr-2"></i>Paket PC</button></a>
+      </div>
 
+        <br>
 
         <!-- php untuk input jumlah data -->
         <?php

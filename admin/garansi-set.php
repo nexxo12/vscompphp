@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -79,7 +79,7 @@
                <div class="input-group-prepend">
                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
                </div>
-                <input class="form-control datepicker" type="text" name="tgl_habis" value="<?= $garansi["TGL_HABIS"]; ?>" autocomplete="off" required>
+                <input class="form-control datepicker" type="text" name="tgl_habis" value="<?= $garansi["TGL_HABIS"]; ?>" autocomplete="off">
              </div>
            </td>
          </tr>

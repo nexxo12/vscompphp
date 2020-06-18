@@ -179,6 +179,27 @@ function tambahdata($data){
   }
 }
 
+function tambahpaketPC($data){
+  global $conn;
+  $proc = $data["proc"];
+  $mobo = $data["mobo"];
+  $ram = $data["ram"];
+  $hdd = $data["hdd"];
+  $ssd = $data["ssd"];
+  $vga = $data["vga"];
+  $psu = $data["psu"];
+  $casing = $data["casing"];
+  $monitor = $data["monitor"];
+  $keyb = $data["keyb"];
+  $mouse = $data["mouse"];
+  $speak = $data["speaker"];
+  $harga = $data["hargapc"];
+  $tgl = $data["tgl"];
+  $query = "INSERT INTO paket_pc VALUES('','$harga','$tgl','$proc','$mobo','$ram','$hdd','$ssd','$vga','$psu','$casing','$monitor','$keyb','$mouse','$speak')";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+}
+
 function tambahdata_supp($data){
     global $conn;
     $id_barang = $data["id_supp"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -445,6 +466,30 @@ function editbarang($data){// value $data diterima dari edit-barang.php berupa $
 
 }
 
+function editPaketPC($data){// value $data diterima dari edit-barang.php berupa $_POST
+  global $conn;
+  $id = $data["id_pc"];
+  $proc = $data["proc"];
+  $mobo = $data["mobo"];
+  $ram = $data["ram"];
+  $hdd = $data["hdd"];
+  $ssd = $data["ssd"];
+  $vga = $data["vga"];
+  $psu = $data["psu"];
+  $casing = $data["casing"];
+  $monitor = $data["monitor"];
+  $keyb = $data["keyb"];
+  $mouse = $data["mouse"];
+  $speak = $data["speaker"];
+  $harga = $data["hargapc"];
+  $query = "UPDATE paket_pc SET HARGA_PC = '$harga', PROC = '$proc', MOBO = '$mobo', RAM = '$ram', HDD = '$hdd', SSD = '$ssd', VGA = '$vga', PSU = '$psu',
+                                CASING = '$casing', MONITOR = '  $monitor', KEYB = '$keyb',  MOUSE = '$mouse', SPEAK = '$speak' WHERE ID_PC = '$id' ;";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+
+
+}
+
 function editsupp($data){// value $data diterima dari edit-suppier.php berupa $_POST
   global $conn;
   $id_supp = $data["id_supp"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -550,7 +595,7 @@ function editgaransi($data){// value $data diterima berupa $_POST
 
 
 function caribarang($cari){
-$query = "SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%'";
+$query = "SELECT * FROM master_barang INNER JOIN kategori ON master_barang.ID_KATEGORI=kategori.ID_KATEGORI WHERE ID_BARANG LIKE '%$cari%' OR NAMA_BARANG LIKE '%$cari%' OR KATEGORI LIKE '%$cari%'";
 return tampil_data($query);
 
 }

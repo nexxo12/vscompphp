@@ -1,5 +1,5 @@
 <?php include'header.php';
-      
+
 ?>
 
 <div class="container-fluid custom-container">
@@ -43,32 +43,38 @@
     <div class="tab-pane fade show active" id="garansi" role="tabpanel" aria-labelledby="contact-tab">
       <br><br>
       <?php
-      $tgl_hbs = tampil_data("SELECT TGL_HABIS FROM garansi");
-         foreach ($tgl_hbs as $tgl) {
-           $tgl_habis = $tgl["TGL_HABIS"];
-         }
+      $data_garansi = tampil_data("SELECT INV_PENJUALAN, TGL_HABIS FROM garansi");
+      $data_garansi2 = array_map("unserialize", array_unique(array_map("serialize", $data_garansi)));
+      // $data_garansi_inv = tampil_data("SELECT INV_PENJUALAN FROM garansi WHERE TGL_HABIS = '0000-00-00'");
+      // $inv = array_map("unserialize", array_unique(array_map("serialize", $data_garansi_inv)));
+      // foreach ($inv as $invoice) {
+      //   $inv_garansi = $invoice["INV_PENJUALAN"]." ";
+      // }
+      // echo "<pre>";
+      // echo print_r($data_garansi2);
+      // echo "</pre>";
+      foreach ($data_garansi2 as $grs) {
+         $data_tgl = $grs["TGL_HABIS"];
+         if ($data_tgl == "0000-00-00" ) {
+           //echo "string" .$inv_count;
+           echo "
+             <div class=\"alert alert-warning\"><i class=\"fas fa-info-circle mr-1\"></i>
+             <strong>Info!</strong> Ada garansi yang belum di atur, silahkan cek <b>".$grs["INV_PENJUALAN"]."</b> dan <b>Atur Garansi!!</b></div>"
+             ;
 
-      $inv = tampil_data("SELECT INV_PENJUALAN FROM garansi WHERE TGL_HABIS = ''");
-      foreach ($inv as $inv_info) {
-        //$inv_count = count($inv_info["INV_PENJUALAN"]);
-        $invoice = $inv_info["INV_PENJUALAN"];
+          }
+          else {
+            echo " ";
 
-              if ($tgl_habis == "0000-00-00") {
-                //echo "string" .$inv_count;
-                echo "
-                  <div class=\"alert alert-warning\"><i class=\"fas fa-info-circle mr-1\"></i>
-                  <strong>Info!</strong> Ada garansi yang belum di atur, silahkan cek <b>".$invoice."</b> dan <b>Atur Garansi!!</b>
-                  </div>"
-                  ;
+          }
+
+      }
 
 
-               }
-               else {
-                 echo " ";
 
-               }
 
-           }
+
+
 
       ?>
 
@@ -78,7 +84,7 @@
             <th scope="col" width="5%">No.</th>
             <th scope="col" width="10%">Invoice</th>
             <th scope="col" width="45%">Nama Barang</th>
-            <th scope="col" width="14%">Tanggal Beli</th>
+            <th scope="col" width="10%">Tanggal Beli</th>
             <th scope="col" width="10%">Atur Garansi</th>
           </tr>
         </thead>

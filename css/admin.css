@@ -67,6 +67,12 @@ a.dropdown-item{
   width: 65%;
 }
 
+.custom-container2{
+  width: 65%;
+  position: relative;
+  left: 17%;
+}
+
 .custom-setprofile{
   width: 30%;
 }
