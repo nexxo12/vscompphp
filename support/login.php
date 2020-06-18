@@ -14,7 +14,7 @@ include'../function/function.php';?>
     <div class="login-form">
     <div class="col-md-6">
         <div class="login-form-input">
-          <h4 class="text-center">LOGIN (ADMIN)</h4>
+          <h4 class="text-center">LOGIN (ADMIN / KASIR)</h4>
           <br><br>
 
           <?php

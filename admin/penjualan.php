@@ -55,7 +55,7 @@
 
           <div class="form-group">
                 <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db;  ?>" readonly>
-                <input type="hidden" name="id_pjforinv" value="">
+                <input type="text" style="position:absolute; top:22%; height:1%;" name="id_pjforinv" value="">
           </div>
         </td>
         <td width="30%"></td>
@@ -112,7 +112,7 @@
       <td width="40%">
         <div class="form-group">
           <label for="exampleInputEmail1"><b>Nama barang :</b></label>
-          <input class="form-control" name="nama_barang" type="text" placeholder="" value="">
+          <input class="form-control" name="nama_barang" type="text" placeholder="" value="" readonly>
         </div>
       </td>
 
@@ -306,6 +306,7 @@ $(document).ready(function(){
   TotalHarga();
   TotalInputHarga();
   ShowNamaBarangINV();
+  idPJ();
   $('button[name=tambah]').click(function(e){//disable loading saat tekan tombol
     e.preventDefault();
     var data = $('.penjualan').serialize();
@@ -320,6 +321,7 @@ $(document).ready(function(){
           TotalInputHarga();
           ShowNamaBarangINV();
           resetinput();
+          idPJ();
         }
 
     })
@@ -340,6 +342,7 @@ function loadData(){
            TotalHarga();
            TotalInputHarga();
            ShowNamaBarangINV();
+           idPJ();
 
 
           }
@@ -365,6 +368,13 @@ function JumlahTotal(){
 function TotalHarga(){
   $.get('ajax_grandTotal.php', function(data_total){
       $('#total_harga').html(data_total);
+  })
+
+}
+
+function idPJ(){
+  $.get('ajax_idbrg.php', function(data_id){
+      $('[name=id_pjforinv]').val(data_id);
   })
 
 }
