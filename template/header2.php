@@ -15,7 +15,7 @@
 
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top primary-nav" id="nav">
     <div class="container">
-    <a class="navbar-brand" href="../index.php">
+    <a class="navbar-brand" href="index.php">
     <img src="img/LOGO+TEXT.png" alt="Logo" id="logo"></img>
     </a>
    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

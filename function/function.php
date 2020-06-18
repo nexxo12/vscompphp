@@ -200,6 +200,14 @@ function tambahpaketPC($data){
   return $hasil;
 }
 
+function tambahkategori($data){
+  global $conn;
+  $kategori = $data["kategori"];
+  $query = "INSERT INTO kategori VALUES('','$kategori')";
+  $hasil = mysqli_query ($conn,$query);
+  return $hasil;
+}
+
 function tambahdata_supp($data){
     global $conn;
     $id_barang = $data["id_supp"];//data diterima berupa format $POST[id_supp] dari master-suppier.php
@@ -423,6 +431,12 @@ function tambahdata_beli($data){
 function deletedata($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
   global $conn;
   $hasil = mysqli_query ($conn,"DELETE FROM master_barang WHERE ID_BARANG= '$id'");
+  return $hasil;
+
+}
+function deleteproduklaris($id){//data value $id diterima dari delete.php yang berupa isi ID_BARANG
+  global $conn;
+  $hasil = mysqli_query ($conn,"DELETE FROM produk_terjual WHERE ID_BARANG= '$id'");
   return $hasil;
 
 }

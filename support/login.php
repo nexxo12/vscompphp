@@ -26,6 +26,7 @@ include'../function/function.php';?>
               // cek USERNAME n password
               if ($row["LEVEL"] == "super") {
                 session_start();
+                $_SESSION["LEVEL"] = $row["LEVEL"];
                 $_SESSION['username'] = $username;
                 header("location: ../admin/dasboard.php");
                 exit;

@@ -9,10 +9,6 @@ if (!isset($_SESSION['username'])) {
 $hasil = mysqli_query($conn, "SELECT *  FROM login WHERE USERNAME = '$user'");
 $row = mysqli_fetch_assoc($hasil);
 
-if (isset($_SESSION["LEVEL"]) != "super") {
-    session_destroy();
-    header("location: ../support/login.php");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +39,7 @@ if (isset($_SESSION["LEVEL"]) != "super") {
     <div class="container-fluid">
     <a class="navbar-brand" href="dasboard.php">
     <img src="../img/LOGO+TEXT.png" alt="Logo" id="logo"></img>
-    <h3 style="display:inline; margin-top:30%">Admin Page</h3>
+    <h3 style="display:inline; margin-top:30%">Kasir Page</h3>
     </a>
    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
    <span class="navbar-toggler-icon"></span>
@@ -56,7 +52,6 @@ if (isset($_SESSION["LEVEL"]) != "super") {
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="setting.php">Setting</a>
-          <a class="dropdown-item" href="tambah-akun.php">Tambah Akun</a>
           <a class="dropdown-item" href="logout.php">Log Out</a>
 
         </div>

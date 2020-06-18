@@ -9,7 +9,7 @@
   <link rel="shortcut icon" href="../img/favicon.ico">
   <title><?=$data_news["JUDUL"]; ?> - VSComp</title>
 
-<?php include'../template/header.php';?>
+<?php include'../template/headerread.php';?>
 
 <div class="container">
   <h2><?=$data_news["JUDUL"]; ?></h2>

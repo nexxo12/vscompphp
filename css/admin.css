@@ -45,6 +45,12 @@ a.dropdown-item{
   margin-left: 45%;
 }
 
+.add-kategori{
+  width: 20%;
+  position: absolute;
+  left: 40%;
+}
+
 .pembelian{
   position: absolute;
   left: 75%;

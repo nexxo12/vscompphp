@@ -9,13 +9,6 @@
 <br>
 
 <div class="container-fluid custom-container">
-  <h5>Last update : <?php
-  $data_barang = tampil_data("SELECT * FROM paket_pc");
-  foreach ($data_barang as $barang){
-    $barang["TGL_PC"];
-  }
-  echo $barang["TGL_PC"];
-    ?></h5>
   <br>
   <div class="row">
     <?php
@@ -37,12 +30,15 @@
             <li class="list-group-item"><?=$barang["CASING"]; ?></li>
             <li class="list-group-item"><?=$barang["MONITOR"]; ?></li>
             <li class="list-group-item"><?=$barang["KEYB"]; ?></li>
-            <li class="list-group-item">
+            <br>
               <div class="order">
               <a href="support/contact.php"><button type="submit" class="btn btn-primary order">Order</button></a>
               </div>
-            </li>
+            <br>
+            <p class="card-text"><small class="text-muted">Last updated : <?=$barang["TGL_PC"]; ?></small></p>
+
           </ul>
+
       </div>
    </div> <!-- end col-md -->
    <!--<div class="space"></div>-->
