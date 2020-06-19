@@ -146,6 +146,21 @@ img.gambar-produk:hover{
     position: relative;
     left: 30%;
   }
+
+  #demo{
+    height: 300px;
+  }
+
+  .d-block{
+    height: 300px;
+  }
+
+  .overlay {
+    opacity: 1;
+
+
+  }
+
 }
 /* end untuk mengatur responsive di mobile*/
 

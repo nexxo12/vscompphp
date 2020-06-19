@@ -13,7 +13,7 @@
 <div class="container">
   <h4><i class="fas fa-search mr-2"></i>Hasil Pencarian "<?=$cari; ?>"</h4>
   <hr noshade></hr>
-  <table class="table table-borderless" id="tabel-data">
+  <table class="table table-borderless table-responsive-sm" id="tabel-data">
     <thead class="text-center">
       <tr>
         <th scope="col" width="0">ID</th>

@@ -10,7 +10,7 @@
 <h4 align="center">Power Supply Stock</h4>
 <div class="container">
   <hr noshade></hr>
-  <table class="table table-borderless" id="tabel-data">
+  <table class="table table-borderless table-responsive-sm" id="tabel-data">
     <thead class="text-center">
       <tr>
         <th scope="col" width="0">ID</th>

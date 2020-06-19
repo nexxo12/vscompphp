@@ -14,7 +14,7 @@ include'../function/function.php';?>
     <div class="login-form">
     <div class="col-md-6">
         <div class="login-form-input">
-          <h4 class="text-center">LOGIN (ADMIN / KASIR)</h4>
+          <h4 class="text-center login">LOGIN (ADMIN / KASIR)</h4>
           <br><br>
 
           <?php
@@ -51,7 +51,7 @@ include'../function/function.php';?>
 
            ?>
 
-          <form class="" action="" method="post">
+          <form class="login" action="" method="post">
           <label for="usr">Username :</label>
           <input type="text" class="form-control" name="username" placeholder="username" autocomplete="off" required>
           <br>

@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/styleproduct.css">
+<link rel="stylesheet" href="css/styleproduct.css?v=1.0">
 <link rel="stylesheet" href="fontawesome/css/all.min.css">
 <link rel="stylesheet" href="css/datatables.min.css">
 <script src="js/jquery-3.5.1.min.js"></script>
@@ -54,7 +54,7 @@
       </li>
     </ul>
     <form class="form-inline" action="pencarian.php" method="get">
-      <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search" required>
+      <input class="form-control mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search" required autocomplete="off">
       <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
     </form>
   </div>

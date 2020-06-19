@@ -177,6 +177,11 @@ a.footer-link{
     right: 24%;
   }
 
+  .login{
+    position: relative;
+    right: 5%;
+  }
+
 }
 
 .input-warranty{
