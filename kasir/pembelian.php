@@ -42,7 +42,7 @@
       <div class="card">
         <h5 class="card-header">Pembelian</h5>
       <div class="card-body">
-        <a href="history-pembelian.php"><p style="position:absolute; left:85%; top:1.5%;">History pembelian &raquo</p></a>
+        <a href="history-pembelian.php"><p class="history">History pembelian &raquo</p></a>
         <?php
           if (isset($_POST["simpan"])) {
             //var_dump($_POST);

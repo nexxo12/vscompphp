@@ -87,10 +87,34 @@ a.dropdown-item{
   width: 10%;
 }
 
-
-@media only screen and (max-width: 600px) {
-
+.history{
+  position:absolute;
+  left:85%;
+  top:1.5%;
 }
+
+.paket-pc{
+  position: absolute;
+  left:36%;
+  top:17.8%;
+}
+
+.space{
+  position: relative;
+  left: 10%;
+}
+
+.inputinv{
+  position:absolute;
+  top:21%;
+  opacity: 0;
+}
+
+.grandtotal{
+  margin-left: 80%;
+  margin-top:1%;
+}
+
 
 
 textarea {
@@ -102,4 +126,75 @@ textarea {
 .table-news{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 10px;
+}
+
+.kategori{
+  position: absolute;
+  left:42.6%;
+  top:17.8%;
+}
+
+
+@media only screen and (max-width: 600px) {
+
+  .pembelian{
+    position: absolute;
+    left: 68%;
+
+  }
+
+  .custom-container{
+    width: 100%;
+  }
+
+  .history{
+    position:absolute;
+    left:67%;
+    top:1.5%;
+  }
+
+  .tgl-beli{
+    position: absolute;
+    top: 20%;
+  }
+
+  .table-group{
+    width: 100%;
+  }
+
+  .grandtotal{
+    opacity: 0;
+  }
+
+  .hide{
+    opacity: 0;
+  }
+
+  .btn-submit{
+    margin-left: 40%;
+  }
+
+  .paket-pc{
+    position: absolute;
+    left:76%;
+    top:35.9%;
+
+  }
+  .input-jumlahdata{
+    width: 60%;
+  }
+
+  .btn-tambah{
+    position: absolute;
+    right: 45%;
+    bottom: 60%;
+  }
+
+  .kategori{
+    position: absolute;
+    left:54%;
+    top:35.9%;
+  }
+
+
 }

@@ -43,7 +43,7 @@
     <div class="card">
       <h5 class="card-header">Penjualan</h5>
     <div class="card-body">
-      <a href="history-penjualan.php"><p style="position:absolute; left:85%; top:1.5%;">History penjualan &raquo</p></a>
+      <a href="history-penjualan.php"><p class="history">History penjualan &raquo</p></a>
     <form class="penjualan" action="" method="post">
     <table class="table-group" id="form" cellpadding="3" align="center" width="80%" border="0">
       <tr>
@@ -55,11 +55,10 @@
 
           <div class="form-group">
                 <input class="form-control mt-3" type="text" name="id_pj" value="<?= $autonumber_db;  ?>" readonly>
-                <input type="text" style="position:absolute; top:22%; height:1%;" name="id_pjforinv" value="">
+                <input type="text" class="inputinv" name="id_pjforinv" value="">
           </div>
         </td>
-        <td width="30%"></td>
-        <td><label for="exampleInputEmail1">Tanggal Beli</label></td>
+        <td><label class="space" for="exampleInputEmail1">Tanggal Beli</label></td>
         <td>:</td>
         <td>
           <?php $tgl=date('Y-m-d'); ?>
@@ -67,6 +66,7 @@
           <input class="form-control mt-2" type="text" name="tgl" placeholder="" value="<?=$tgl ?>" readonly>
           </div>
         </td>
+
       </tr>
       <tr>
         <td width=""><label for="exampleInputEmail1">Barang</label></td>
@@ -80,8 +80,8 @@
           </div>
           </div>
         </td>
-        <td width=""></td>
-        <td><label for="exampleInputEmail1">Kasir</label></td>
+
+        <td><label class="space" for="exampleInputEmail1">Kasir</label></td>
         <td>:</td>
         <td>
           <div class="form-group">
@@ -107,7 +107,7 @@
       </tr>
   </table>
   <br>
-  <table align="center" border="0" width="70%">
+  <table class="table-group" align="center" border="0" width="70%">
     <tr>
       <td width="40%">
         <div class="form-group">
@@ -117,7 +117,7 @@
       </td>
 
       <td><div class="form-group">
-      <label for="exampleInputEmail1"><b>Harga Awal :</b></label>
+      <label for="exampleInputEmail1"><b>Harga :</b></label>
       <input type="hidden" name="harga_awal" value="">
       <input class="form-control" type="text" name="harga_awal2" placeholder="" value="" readonly>
       </div>
@@ -141,7 +141,7 @@
   </form>
 
 
-  <table class="table" align="center" border="0">
+  <table class="table table-responsive-sm" align="center" border="0">
     <thead>
       <tr>
         <th scope="col" width="5%">No.</th>
@@ -165,7 +165,7 @@
 
     <tfoot>
     <tr>
-      <td colspan="3"><h5 style="margin-left:80%; margin-top:1%;">GRAND TOTAL : </h5><hr></td>
+      <td colspan="3"><h5 class="grandtotal" style="">GRAND TOTAL : </h5><hr class="hide"></td> 
       <td align="center"><h5 style="margin-top:15%;" id="jumlah_total"></h5><hr></td>
       <td><h5 class="mt-2" id="total_harga"></h5><hr></td>
     </tr>

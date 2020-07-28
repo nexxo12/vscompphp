@@ -41,7 +41,7 @@
       <div class="card">
         <h5 class="card-header">History Pembelian</h5>
       <div class="card-body">
-        <table class="table table-bordered" id="tabel-data">
+        <table class="table table-bordered table-responsive-sm" id="tabel-data">
           <thead class="thead-dark text-center">
             <tr>
               <th scope="col" width="9%">No Faktur</th>

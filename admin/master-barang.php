@@ -43,19 +43,19 @@
 
       <div class="form-input">
           <form class="" action="" method="POST">
-          <table>
+          <table class="tambah-data">
             <tr>
-              <td><input class="form-control" type="text" placeholder="Jumlah Data" name="jumlah" required></td>
-              <td><button class="btn btn-success" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button></a></td>
+              <td><input class="form-control input-jumlahdata" type="text" placeholder="Jumlah Data" name="jumlah" required></td>
+              <td><button class="btn btn-success btn-tambah" type="submit" name="tambah"><i class="fas fa-plus mr-2"></i>Tambah</button></a></td>
 
             </tr>
         </table>
       </form>
-      <div style="position: absolute; left:36%; top:17.8%;">
+      <div class="paket-pc">
         <a href="paket-pc.php"><button class="btn btn-success" type="submit" name="paket_pc"><i class="fas fa-cog mr-2"></i>Paket PC</button></a>
       </div>
       <form class="" action="" method="POST">
-      <div style="position: absolute; left:42.6%; top:17.8%;">
+      <div class="kategori">
         <button class="btn btn-success" type="submit" name="kategori"><i class="fas fa-plus mr-2"></i>Kategori</button>
       </div>
       </form>
@@ -217,7 +217,7 @@
       <button class="btn btn-primary" type="submit" name="cari"><i class="fas fa-search"></i></button>
     </form><br><br>
 
-    <table class="table table-bordered ">
+    <table class="table table-bordered table-responsive-sm">
       <thead class="thead-dark text-center">
         <tr>
           <th scope="col" width="5%">No.</th>

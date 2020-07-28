@@ -140,7 +140,7 @@ a.footer-link{
   left: 48.3%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 420px) {
   .input-ongkir {
     width: 94%;
   }
@@ -179,7 +179,7 @@ a.footer-link{
 
   .login{
     position: relative;
-    right: 5%;
+    right: 11%;
   }
 
 }
