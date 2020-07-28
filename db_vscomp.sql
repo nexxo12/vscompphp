@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2020 at 09:53 AM
+-- Generation Time: Jul 28, 2020 at 01:14 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.29
 
@@ -190,7 +190,7 @@ INSERT INTO `master_barang` (`ID_BARANG`, `ID_KATEGORI`, `NAMA_BARANG`, `STOK`, 
 ('BR005', 3, 'ASRock X570 Phantom Gaming X', 1, 'unit', 2700000, ''),
 ('BR006', 1, 'Intel Core i3 9100F 3.6Ghz Up To 4.2Ghz Box Coffee Lake', 10, 'unit', 1120000, ''),
 ('BR007', 5, 'Seasonic Prime Gold GX-1000 / 1000GD - 1000W Full Modular', 0, 'unit', 2850000, ''),
-('BR008', 6, 'PowerColor RX 580 RED DRAGON 8GB GDDR5', 0, 'unit', 2870000, ''),
+('BR008', 6, 'PowerColor RX 580 RED DRAGON 8GB GDDR5', 5, 'unit', 2870000, ''),
 ('BR009', 3, 'Fast Intel H61 Socket 1155 with HDMI Port', 0, 'unit', 656000, ''),
 ('BR010', 2, 'PATRIOT VIPER ELITE DDR4 8GB (2x4GB) 2666Mhz', 5, 'unit', 715000, ''),
 ('BR011', 3, 'ECS H310CHS-M7 LGA 1151', 5, 'unit', 950000, ''),
@@ -331,7 +331,8 @@ INSERT INTO `pembelian_barang` (`ID_BELI`, `ID_SUPP`, `ID_BARANG`, `ID_LOGIN`, `
 ('BL011', 20205, 'BR015', 3, 10, 'unit', 300000, '2020-06-18'),
 ('BL012', 20203, 'BR011', 3, 10, 'unit', 800000, '2020-06-18'),
 ('BL013', 20205, 'BR006', 3, 10, 'unit', 1000000, '2020-06-18'),
-('BL014', 20203, 'BR010', 3, 10, 'unit', 600000, '2020-06-18');
+('BL014', 20203, 'BR010', 3, 10, 'unit', 600000, '2020-06-18'),
+('BL015', 20202, 'BR008', 3, 5, 'unit', 2700000, '2020-07-15');
 
 --
 -- Triggers `pembelian_barang`
@@ -605,7 +606,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `list_penjualan`
 --
 ALTER TABLE `list_penjualan`
-  MODIFY `ID_PENJUALAN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID_PENJUALAN` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `news`
